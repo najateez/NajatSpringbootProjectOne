@@ -14,5 +14,9 @@ public class Course {
     Integer id;
     @Column(name="course_name")
     String name;
-    List<Mark> theMarks;  //marks he wrote
+    @ManyToOne  //many students, one course.
+    @JoinColumn(name= "student_id" , referencedColumnName = "id")
+    Student student;
+
+
 }

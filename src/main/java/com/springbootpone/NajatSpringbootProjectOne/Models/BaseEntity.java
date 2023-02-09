@@ -8,7 +8,7 @@ import java.util.Date;
 public class BaseEntity {
 
 /*  This class we will not using it now.. this just if there is common properties for all classes, we can write in that
-class extends BassEntity.  instead of writing same properties in all classes , and already common.
+class extends BaseEntity.  instead of writing same properties in all classes , and already common.
 
  */
 

@@ -6,18 +6,22 @@ import javax.persistence.*;
 import java.util.List;
 
 
-@Entity
+@Entity  //above each class should be Entity notation
 public class School {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id    //because primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  //for auto increment.
     Integer id;
     @Column(name="school_name")
     String name;
 
-    @OneToMany   //One school, many students
-    @JoinColumn(referencedColumnName = "id")  // for fk
-    List<Student> theStudent; //students he wrote
+
+    /* Note:
+    - just examples:
+      - If objectchaining : @OneToOne . will be     Student student;
+      - if objectchaing list : @ManyToOne. will be List<Student> theStudent;
+      - to see objectchaining between tables from database: right click on school table... click view dependencies.
+     */
 
     public Integer getId() {
         return id;
@@ -33,13 +37,5 @@ public class School {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Student> getTheStudent() {
-        return theStudent;
-    }
-
-    public void setTheStudent(List<Student> theStudent) {
-        this.theStudent = theStudent;
     }
 }
