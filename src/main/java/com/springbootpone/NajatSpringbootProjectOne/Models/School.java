@@ -23,6 +23,8 @@ public class School {
       - to see objectchaining between tables from database: right click on school table... click view dependencies.
      */
 
+    //Generate setters & getters
+
     public Integer getId() {
         return id;
     }

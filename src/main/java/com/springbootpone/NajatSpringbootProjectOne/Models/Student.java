@@ -31,6 +31,7 @@ public class Student {
 
     //   List<Course> theCourse; //courses he wrote
 
+    //Generate setters & getters
 
     public Integer getId() {
         return id;
