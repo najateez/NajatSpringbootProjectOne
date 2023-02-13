@@ -33,4 +33,10 @@ public class CourseService {
         courseRepository.delete(courseToDelete);
     }
 
+    //getById
+    public Course getCourseById(Integer id){
+        Course course = courseRepository.getCourseById(id);
+        return course;
+    }
+
 }

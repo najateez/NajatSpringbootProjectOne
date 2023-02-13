@@ -33,4 +33,10 @@ public class MarkService {
         Mark markToDelete = markRepository.findById(id).get();
         markRepository.delete(markToDelete);
     }
+
+    //getById
+    public Mark getMarkById(Integer id){
+        Mark mark = markRepository.getMarkById(id);
+        return mark;
+    }
 }

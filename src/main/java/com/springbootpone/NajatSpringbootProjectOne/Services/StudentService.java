@@ -19,8 +19,8 @@ public class StudentService {
    public void addStudent(){
 
         Student studentObj=new Student();
-        studentObj.setName("alkhatria");
-        studentObj.setRollNumber("54");
+        studentObj.setName("pppp");
+        studentObj.setRollNumber("982");
         studentRepository.save(studentObj);
     }
 
@@ -32,6 +32,12 @@ public class StudentService {
     public void deleteStudentById(Integer id){
         Student studentToDelete = studentRepository.findById(id).get();
         studentRepository.delete(studentToDelete);
+    }
+
+    // getById :-
+    public Student getStudentById(Integer id){
+        Student student = studentRepository.getStudentById(id);
+        return student;
     }
 
 

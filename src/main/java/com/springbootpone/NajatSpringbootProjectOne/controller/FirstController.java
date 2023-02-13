@@ -48,7 +48,6 @@ public class FirstController {
         courseService.addCourse();
     }
 
-
     public void addMark(){
 
         markService.addMark();
@@ -106,6 +105,33 @@ public class FirstController {
         markService.deleteMarkById(id);
         return "Record of mark table deleted successfully";
     }
+
+    //getById :-
+    //exp: localhost:8080/school/getById?schoolId=2  . coulmnName = depend on what you write in sqlQuery , user input.
+    @RequestMapping(value = "school/getById", method = RequestMethod.GET)
+    public School getSchoolById(@RequestParam Integer schoolId){
+        School school = schoolService.getSchoolById(schoolId);
+        return school;
+    }
+
+    @RequestMapping(value = "student/getById", method = RequestMethod.GET)
+    public Student getStudentById(@RequestParam Integer studentId){
+        Student student = studentService.getStudentById(studentId);
+        return student;
+    }
+
+    @RequestMapping(value = "course/getById", method = RequestMethod.GET)
+    public Course getCourseById(@RequestParam Integer courseId){
+        Course course = courseService.getCourseById(courseId);
+        return course;
+    }
+
+    @RequestMapping(value = "mark/getById", method = RequestMethod.GET)
+    public Mark getMarkById(@RequestParam Integer markId){
+        Mark mark = markService.getMarkById(markId);
+        return mark;
+    }
+
 
 
 

@@ -21,8 +21,6 @@ public class SchoolService {
         schoolRepository.save(schoolObj);
     }
 
-
-
     //this getAllSchools list to show data from table to screen.
     public List<School> getAllSchools() {
 
@@ -32,5 +30,10 @@ public class SchoolService {
     public void deleteSchoolById(Integer id){
         School schoolToDelete = schoolRepository.findById(id).get();
         schoolRepository.delete(schoolToDelete);
+    }
+     // getById :-
+    public School getSchoolById(Integer id){
+        School school = schoolRepository.getSchoolById(id);
+        return school;
     }
 }
