@@ -37,6 +37,13 @@ public class FirstController {
     /* must be one @GetMapping to put , just for table that you want to insert values. can not write above
      all functions, it will show errors during run time.
      */
+
+    /* - when you want to insert any value in any table just put notation @GetMapping above that add function
+    and it will insert values of that table.  ONLY one table can insert value at a time.  (for ONE TABLE).
+    - But if you want to insert values in any table depend of user wants . USE @RequestMapping.
+     */
+
+    // for inserting : exp : localhost:8080
     @GetMapping
     public void addSchool(){
 
@@ -54,6 +61,7 @@ public class FirstController {
     }
 
     //to show data which is added in table into screen in localhost and postman
+    //exp: localhost:8080/school/getAll
     @RequestMapping(value="school/getAll", method = RequestMethod.GET)
     public List<School> getAllSchools() {
         List<School> schools = schoolService.getAllSchools();
@@ -78,6 +86,7 @@ public class FirstController {
         return theMark;
     }
 
+    //exp: localhost:8080/school/deleteById?id=7
     @GetMapping(value = "school/deleteById")
     public String deleteSchoolById(@RequestParam Integer id){
 
@@ -129,6 +138,32 @@ public class FirstController {
     @RequestMapping(value = "mark/getById", method = RequestMethod.GET)
     public Mark getMarkById(@RequestParam Integer markId){
         Mark mark = markService.getMarkById(markId);
+        return mark;
+    }
+
+    //getByColumnName:-
+    // exp : localhost:8080/school/getByColumnSchoolName?schoolName=abc .   SchoolName ->that user input
+    @RequestMapping(value = "school/getByColumnSchoolName", method = RequestMethod.GET)
+    public School getSchoolBySchoolName(@RequestParam String schoolName){
+        School school = schoolService.getSchoolBySchoolName(schoolName);
+        return school;
+    }
+
+    @RequestMapping(value = "student/getByColumnStudentName", method = RequestMethod.GET)
+    public Student getStudentByStudentName(@RequestParam String studentName){
+        Student student = studentService.getStudentByStudentName(studentName);
+        return student;
+    }
+
+    @RequestMapping(value = "course/getByColumnCourseName", method = RequestMethod.GET)
+    public Course getCourseByCourseName(@RequestParam String courseName){
+        Course course = courseService.getCourseByCourseName(courseName);
+        return course;
+    }
+
+    @RequestMapping(value = "mark/getByColumnObtainedMarks", method = RequestMethod.GET)
+    public Mark getCourseByCourseName(@RequestParam Integer obtainedMarks){
+        Mark mark = markService.getMarkByObtainedMarks(obtainedMarks);
         return mark;
     }
 

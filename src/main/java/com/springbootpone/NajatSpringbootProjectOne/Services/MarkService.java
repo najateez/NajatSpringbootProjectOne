@@ -39,4 +39,10 @@ public class MarkService {
         Mark mark = markRepository.getMarkById(id);
         return mark;
     }
+
+    //getBySchoolName :-
+    public Mark getMarkByObtainedMarks(Integer obtainedMarks) {
+        Mark mark = markRepository.getMarkByObtainedMarks(obtainedMarks);
+        return mark;
+    }
 }

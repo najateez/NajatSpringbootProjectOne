@@ -17,7 +17,7 @@ public class SchoolService {
     public void addSchool(){
 
         School schoolObj=new School();
-        schoolObj.setName("sultanSchool");
+        schoolObj.setName("disney school");
         schoolRepository.save(schoolObj);
     }
 
@@ -36,4 +36,11 @@ public class SchoolService {
         School school = schoolRepository.getSchoolById(id);
         return school;
     }
+
+    //getBySchoolName :-
+    public School getSchoolBySchoolName(String name) {
+        School school = schoolRepository.getSchoolBySchoolName(name);
+        return school;
+    }
+
 }

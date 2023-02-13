@@ -21,6 +21,11 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query(value = "SELECT s from Student s where s.id = :studentId")  // :studentId -> for user input
     Student getStudentById(@Param("studentId") Integer id);
 
+    //getByColumnName :-  (column name depend on what you write in model package).
+    @Query(value = "SELECT s from Student s where s.name = :studentName")  // :studentName -> for user input
+    Student getStudentByStudentName(@Param("studentName") String name);
+
+
 
 
 }

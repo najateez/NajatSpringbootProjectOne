@@ -40,6 +40,13 @@ public class StudentService {
         return student;
     }
 
+    // getByColumnName :-
+    public Student getStudentByStudentName(String name) {
+        Student student = studentRepository.getStudentByStudentName(name);
+        return student;
+    }
+
+
 
 
 

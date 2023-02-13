@@ -38,5 +38,10 @@ public class CourseService {
         Course course = courseRepository.getCourseById(id);
         return course;
     }
+    //geByCourseName :-
+    public Course getCourseByCourseName(String name) {
+        Course course = courseRepository.getCourseByCourseName(name);
+        return course;
+    }
 
 }

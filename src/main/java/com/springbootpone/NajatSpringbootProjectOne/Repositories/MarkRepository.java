@@ -22,4 +22,8 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query(value = "SELECT s from Mark s where s.id = :markId")  // :schoodId -> for user input
     Mark getMarkById(@Param("markId") Integer id);
 
+    //getByColumnName :-  (column name depend on what you write in model package).
+    @Query(value = "SELECT s from Mark s where s.obtainedMarks = :obtainedMarks")  // :schoolName -> for user input
+    Mark getMarkByObtainedMarks(@Param("obtainedMarks") Integer obtainedMarks);
+
 }

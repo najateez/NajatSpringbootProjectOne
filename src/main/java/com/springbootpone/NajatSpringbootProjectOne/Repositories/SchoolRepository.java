@@ -19,8 +19,10 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     List<School> getAllSchools();
 
     //getById :-
-    @Query(value = "SELECT s from School s where s.id = :schoolId")  // :schoodId -> for user input
+    @Query(value = "SELECT s from School s where s.id = :schoolId")  // :schoolId -> for user input
     School getSchoolById(@Param("schoolId") Integer id);
 
-
+    //getByColumnName :-  (column name depend on what you write in model package).
+    @Query(value = "SELECT s from School s where s.name = :schoolName")  // :schoolName -> for user input
+    School getSchoolBySchoolName(@Param("schoolName") String name);
 }
