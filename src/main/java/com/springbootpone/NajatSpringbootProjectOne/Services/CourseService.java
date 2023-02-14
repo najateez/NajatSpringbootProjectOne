@@ -16,6 +16,9 @@ public class CourseService {
     @Autowired   // it is dependancy injection
     CourseRepository courseRepository;
 
+    @Autowired   // for fk
+    StudentRepository studentRepository;
+
     public void addCourse(){
 
         Course courseObj=new Course();
@@ -42,6 +45,14 @@ public class CourseService {
     public Course getCourseByCourseName(String name) {
         Course course = courseRepository.getCourseByCourseName(name);
         return course;
+    }
+
+    //for fk:-
+    public List<Course> getCoursesByStudentName(String studentName){
+        Student student = studentRepository.getStudentByStudentName(studentName);
+        Integer studentId = student.getId();
+        List<Course> courseList = courseRepository.getCoursesByStudentId(studentId);
+        return courseList;
     }
 
 }

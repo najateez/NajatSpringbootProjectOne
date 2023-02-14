@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Entity  //above each class should be Entity notation
-public class School {
+public class School extends BaseEntity {
 
     @Id    //because primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //for auto increment.

@@ -25,4 +25,7 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     //getByColumnName :-  (column name depend on what you write in model package).
     @Query(value = "SELECT s from School s where s.name = :schoolName")  // :schoolName -> for user input
     School getSchoolBySchoolName(@Param("schoolName") String name);
+
+
+
 }

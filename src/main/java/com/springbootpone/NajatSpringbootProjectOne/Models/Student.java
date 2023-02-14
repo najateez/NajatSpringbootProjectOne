@@ -15,7 +15,7 @@ import java.util.List;
 //@Setter
 @Entity
 //@Table(name= "dbo.student")   //no need for this because already when we run program will create table. with it will create 2 student tables in database.
-public class Student {
+public class Student extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment id.(idintity).  .auto-> any number. .sequence -> if you give number 7 after will give 8

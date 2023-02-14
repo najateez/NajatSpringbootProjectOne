@@ -3,6 +3,7 @@ package com.springbootpone.NajatSpringbootProjectOne.Services;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
+import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.CourseRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class MarkService {
 
     @Autowired   // it is dependancy injection
     MarkRepository markRepository;
+
+    @Autowired   // for fk
+    CourseRepository courseRepository;
 
     public void addMark(){
 
@@ -44,5 +48,13 @@ public class MarkService {
     public Mark getMarkByObtainedMarks(Integer obtainedMarks) {
         Mark mark = markRepository.getMarkByObtainedMarks(obtainedMarks);
         return mark;
+    }
+
+    //for fk:-
+    public List<Mark> getMarkByCourseName(String courseName){
+        Course course = courseRepository.getCourseByCourseName(courseName);
+        Integer courseId = course.getId();
+        List<Mark> markList = markRepository.getMarksByCourseId(courseId);
+        return markList;
     }
 }

@@ -25,6 +25,12 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query(value = "SELECT s from Student s where s.name = :studentName")  // :studentName -> for user input
     Student getStudentByStudentName(@Param("studentName") String name);
 
+   //  the way of adding fk (foreign key).. school id in student table.
+   @Query(value = "SELECT st from Student st where st.school.id = :id")
+    List<Student> getStudentsBySchoolId(@Param("id")Integer id);
+
+
+
 
 
 
