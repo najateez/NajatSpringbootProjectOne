@@ -19,10 +19,10 @@ public class CourseService {
     @Autowired   // for fk
     StudentRepository studentRepository;
 
-    public void addCourse(){
+    public void addCourse() {
 
-        Course courseObj=new Course();
-        courseObj.setName("php");
+        Course courseObj = new Course();
+        courseObj.setName("python");
         courseRepository.save(courseObj);
     }
 
@@ -31,16 +31,17 @@ public class CourseService {
         return courseRepository.getAllCourses();
     }
 
-    public void deleteCourseById(Integer id){
+    public void deleteCourseById(Integer id) {
         Course courseToDelete = courseRepository.findById(id).get();
         courseRepository.delete(courseToDelete);
     }
 
     //getById
-    public Course getCourseById(Integer id){
+    public Course getCourseById(Integer id) {
         Course course = courseRepository.getCourseById(id);
         return course;
     }
+
     //geByCourseName :-
     public Course getCourseByCourseName(String name) {
         Course course = courseRepository.getCourseByCourseName(name);
@@ -48,11 +49,18 @@ public class CourseService {
     }
 
     //for fk:-
-    public List<Course> getCoursesByStudentName(String studentName){
+    public List<Course> getCoursesByStudentName(String studentName) {
         Student student = studentRepository.getStudentByStudentName(studentName);
         Integer studentId = student.getId();
         List<Course> courseList = courseRepository.getCoursesByStudentId(studentId);
         return courseList;
     }
+
+    // getAllActiveCourses :-
+    public List<Course> getAllActiveCourses() {
+
+        return courseRepository.getAllActiveCourses();
+    }
+
 
 }

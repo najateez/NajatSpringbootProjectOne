@@ -1,15 +1,17 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
+import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
+//@RestController
 public class CourseController {
 
     @Autowired
@@ -44,6 +46,13 @@ public class CourseController {
     public Course getCourseByCourseName(@RequestParam String courseName){
         Course course = courseService.getCourseByCourseName(courseName);
         return course;
+    }
+
+    // getAllActiveCourses :-
+    @RequestMapping(value = "getAllCoursesByIsActive")
+    public List<Course> getAllActiveCourses() {
+        List<Course> activeCoursesList = courseService.getAllActiveCourses();
+        return activeCoursesList;
     }
 
 }

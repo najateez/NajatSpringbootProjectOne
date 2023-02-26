@@ -3,18 +3,23 @@ package com.springbootpone.NajatSpringbootProjectOne.controller;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
       which is related to school will be here. student to student. course to course. mark to mark. but combination
       between 2 classes as fk , should be in FirstController.
+     */
+
+    /* For now because we have more than one cotroller for each class its own controller, so will not work
+    all of them at the same time if we put @RestController for each class, will show errors during run time.
+     thats why i commented remaining @RestController ,just in this class there is.
+     - We should add one notation @RestController for one controller only to see if it is working.
      */
 
     @Autowired
@@ -54,7 +59,7 @@ public class SchoolController {
     //getById :-
     //exp: localhost:8080/school/getById?schoolId=2  . coulmnName = depend on what you write in sqlQuery , user input.
     @RequestMapping(value = "school/getById", method = RequestMethod.GET)
-    public School getSchoolById(@RequestParam Integer schoolId){
+    public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
         return school;
     }
@@ -62,8 +67,15 @@ public class SchoolController {
     //getByColumnName:-
     // exp : localhost:8080/school/getByColumnSchoolName?schoolName=abc .   SchoolName ->that user input
     @RequestMapping(value = "school/getByColumnSchoolName", method = RequestMethod.GET)
-    public School getSchoolBySchoolName(@RequestParam String schoolName){
+    public School getSchoolBySchoolName(@RequestParam String schoolName) {
         School school = schoolService.getSchoolBySchoolName(schoolName);
         return school;
+    }
+
+    // getAllActiveSchools :-
+    @RequestMapping(value = "getAllSchoolsByIsActive")
+    public List<School> getAllActiveSchools() {
+        List<School> activeSchoolsList = schoolService.getAllActiveSchools();
+        return activeSchoolsList;
     }
 }

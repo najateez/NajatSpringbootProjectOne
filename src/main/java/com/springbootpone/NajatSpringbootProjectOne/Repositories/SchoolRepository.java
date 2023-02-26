@@ -26,6 +26,10 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     @Query(value = "SELECT s from School s where s.name = :schoolName")  // :schoolName -> for user input
     School getSchoolBySchoolName(@Param("schoolName") String name);
 
+    //getAllActiveSchools :-
+    @Query(value = "SELECT s from School s where s.isActive = true")
+    List<School> getAllActiveSchools();
+
 
 
 }

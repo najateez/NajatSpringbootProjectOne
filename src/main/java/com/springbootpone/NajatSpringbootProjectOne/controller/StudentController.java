@@ -1,15 +1,16 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
+import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+//@RestController
 public class StudentController {
 
     @Autowired // it is as define object. exp: StudentService studentService= new StudentService studentService(); . instead of using this, use @Autowired .
@@ -44,6 +45,13 @@ public class StudentController {
     public Student getStudentByStudentName(@RequestParam String studentName){
         Student student = studentService.getStudentByStudentName(studentName);
         return student;
+    }
+
+    // getAllActiveStudents :-
+    @RequestMapping(value = "getAllStudentsByIsActive")
+    public List<Student> getAllActiveStudents() {
+        List<Student> activeStudentsList = studentService.getAllActiveStudents();
+        return activeStudentsList;
     }
 
 

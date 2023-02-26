@@ -23,8 +23,8 @@ public class MarkService {
     public void addMark(){
 
         Mark markObj=new Mark();
-        markObj.setObtainedMarks(82);
-        markObj.setGrade("very good");
+        markObj.setObtainedMarks(93);
+        markObj.setGrade("excellent");
         markRepository.save(markObj);
     }
 
@@ -57,4 +57,11 @@ public class MarkService {
         List<Mark> markList = markRepository.getMarksByCourseId(courseId);
         return markList;
     }
+
+    // getAllActiveMarks :-
+    public List<Mark> getAllActiveMarks(){
+
+        return markRepository.getAllActiveMarks();
+    }
+
 }

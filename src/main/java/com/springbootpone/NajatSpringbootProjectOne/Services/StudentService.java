@@ -23,8 +23,8 @@ public class StudentService {
    public void addStudent(){
 
         Student studentObj=new Student();
-        studentObj.setName("pppp");
-        studentObj.setRollNumber("982");
+        studentObj.setName("jannat");
+        studentObj.setRollNumber("3435");
         studentRepository.save(studentObj);
     }
 
@@ -57,6 +57,12 @@ public class StudentService {
         Integer schoolId = school.getId();
         List<Student> studentList = studentRepository.getStudentsBySchoolId(schoolId);
         return studentList;
+    }
+
+    // getAllActiveSchools :-
+    public List<Student> getAllActiveStudents(){
+
+        return studentRepository.getAllActiveStudents();
     }
 
 

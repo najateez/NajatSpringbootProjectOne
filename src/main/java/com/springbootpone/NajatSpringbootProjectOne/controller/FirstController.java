@@ -9,6 +9,7 @@ import com.springbootpone.NajatSpringbootProjectOne.Services.MarkService;
 import com.springbootpone.NajatSpringbootProjectOne.Services.SchoolService;
 import com.springbootpone.NajatSpringbootProjectOne.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,8 @@ import java.util.List;
 /* to show output into the sceen. when you write in googlechrom : your ip:8080. or localhost:8080 .
   you can find your ip . cmd -> ipconfig -> IPv4 Address. . . . . . . . . . . : 192.168.100.69 .
  */
-@RestController
+
+//@RestController
 public class FirstController {
 
     @Autowired

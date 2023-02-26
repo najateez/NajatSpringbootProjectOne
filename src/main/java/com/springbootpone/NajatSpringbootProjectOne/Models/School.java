@@ -3,8 +3,8 @@ package com.springbootpone.NajatSpringbootProjectOne.Models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.servlet.annotation.WebServlet;
 import java.util.List;
-
 
 @Entity  //above each class should be Entity notation
 public class School extends BaseEntity {
