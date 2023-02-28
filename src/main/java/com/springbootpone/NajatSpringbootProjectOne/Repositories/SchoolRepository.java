@@ -2,6 +2,7 @@ package com.springbootpone.NajatSpringbootProjectOne.Repositories;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,6 +30,11 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     //getAllActiveSchools :-
     @Query(value = "SELECT s from School s where s.isActive = true")
     List<School> getAllActiveSchools();
+
+    //getAllNotActiveSchools :-
+    @Query(value = "SELECT s from School s where s.isActive = false")
+    List<School> getAllInActiveSchools();
+
 
 
 

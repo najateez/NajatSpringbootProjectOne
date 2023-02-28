@@ -2,6 +2,7 @@ package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
+import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,21 @@ public class CourseController {
     public List<Course> getAllActiveCourses() {
         List<Course> activeCoursesList = courseService.getAllActiveCourses();
         return activeCoursesList;
+    }
+
+    // getAllNotActiveCourses :-
+    @RequestMapping(value = "getAllCoursesByIsActiveFalse")
+    public List<Course> getAllInActiveCourses() {
+        List<Course> notActiveCoursesList = courseService.getAllInActiveCourses();
+        return notActiveCoursesList;
+    }
+
+    //deleteCourseByColumnNameCourseName :-
+    @GetMapping(value = "course/deleteByColumnNameCourseName")
+    public String deleteCourseByColumnNameCourseName(@RequestParam String name) {
+
+        courseService.deleteCourseByColumnNameCourseName(name);
+        return "Record of school table deleted successfully";
     }
 
 }

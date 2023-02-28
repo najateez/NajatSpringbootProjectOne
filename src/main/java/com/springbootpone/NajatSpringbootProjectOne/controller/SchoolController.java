@@ -1,11 +1,15 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
+import com.springbootpone.NajatSpringbootProjectOne.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.springbootpone.NajatSpringbootProjectOne.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -78,4 +82,21 @@ public class SchoolController {
         List<School> activeSchoolsList = schoolService.getAllActiveSchools();
         return activeSchoolsList;
     }
+
+    // getAllNotActiveSchools :-
+    @RequestMapping(value = "getAllSchoolsByIsActiveFalse")
+    public List<School> getAllInActiveSchools() {
+        List<School> notActiveSchoolsList = schoolService.getAllInActiveSchools();
+        return notActiveSchoolsList;
+    }
+
+    //deleteSchoolByColumnNameSchoolName :-
+    @GetMapping(value = "school/deleteByColumnNameSchoolName")
+    public String deleteSchoolByColumnNameSchoolName(@RequestParam String name) {
+
+        schoolService.deleteSchoolByColumnNameSchoolName(name);
+        return "Record of school table deleted successfully";
+    }
+
+
 }

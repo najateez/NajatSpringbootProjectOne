@@ -62,5 +62,18 @@ public class CourseService {
         return courseRepository.getAllActiveCourses();
     }
 
+    // getAllNotActiveCourses :-
+    public List<Course> getAllInActiveCourses(){
+
+        return courseRepository.getAllInActiveCourses();
+    }
+
+    //deleteByColumnNameCourseName :-
+    public void deleteCourseByColumnNameCourseName(String name){
+        Course courseToDelete = courseRepository.getCourseByCourseName(name); //just change in this line
+        //  School schoolToDelete = schoolRepository.findById(id).get();
+        courseRepository.delete(courseToDelete);
+    }
+
 
 }

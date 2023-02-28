@@ -3,21 +3,29 @@ package com.springbootpone.NajatSpringbootProjectOne.Services;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.SchoolRepository;
+import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SchoolService {
 
     @Autowired //to link schoolService with schoolRepository.
     SchoolRepository schoolRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-    public void addSchool(){
+    public void addSchool() {
 
-        School schoolObj=new School();
-        schoolObj.setName("alkhatris school");
+        School schoolObj = new School();
+        schoolObj.setName("madrasa");
         schoolRepository.save(schoolObj);
     }
 
@@ -27,12 +35,13 @@ public class SchoolService {
         return schoolRepository.getAllSchools();
     }
 
-    public void deleteSchoolById(Integer id){
+    public void deleteSchoolById(Integer id) {
         School schoolToDelete = schoolRepository.findById(id).get();
         schoolRepository.delete(schoolToDelete);
     }
-     // getById :-
-    public School getSchoolById(Integer id){
+
+    // getById :-
+    public School getSchoolById(Integer id) {
         School school = schoolRepository.getSchoolById(id);
         return school;
     }
@@ -44,10 +53,26 @@ public class SchoolService {
     }
 
     // getAllActiveSchools :-
-    public List<School> getAllActiveSchools(){
+    public List<School> getAllActiveSchools() {
 
         return schoolRepository.getAllActiveSchools();
     }
+
+    // getAllNotActiveSchools :-
+    public List<School> getAllInActiveSchools() {
+
+        return schoolRepository.getAllInActiveSchools();
+    }
+
+
+    //deleteByColumnNameSchoolName ... its same as deleteById but little changes in code
+    public void deleteSchoolByColumnNameSchoolName(String name) {
+        School schoolToDelete = schoolRepository.getSchoolBySchoolName(name); //just change in this line
+        //  School schoolToDelete = schoolRepository.findById(id).get();
+        schoolRepository.delete(schoolToDelete);
+    }
+
+
 
 
 

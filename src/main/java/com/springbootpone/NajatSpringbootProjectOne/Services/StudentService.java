@@ -65,6 +65,19 @@ public class StudentService {
         return studentRepository.getAllActiveStudents();
     }
 
+    // getAllNotActiveStudents :-
+    public List<Student> getAllInActiveStudents(){
+
+        return studentRepository.getAllInActiveStudents();
+    }
+
+    //deleteByColumnNameStudentName :-
+    public void deleteStudentByColumnNameStudentName(String name){
+        Student studentToDelete = studentRepository.getStudentByStudentName(name);
+        //  School schoolToDelete = schoolRepository.findById(id).get();
+        studentRepository.delete(studentToDelete);
+    }
+
 
 
 

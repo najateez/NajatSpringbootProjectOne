@@ -54,6 +54,24 @@ public class StudentController {
         return activeStudentsList;
     }
 
+    // getAllNotActiveStudents :-
+    @RequestMapping(value = "getAllStudentsByIsActiveFalse")
+    public List<Student> getAllInActiveStudents() {
+        List<Student> notActiveStudentsList = studentService.getAllInActiveStudents();
+        return notActiveStudentsList;
+    }
+
+    //deleteStudentByColumnNameStudentName :-
+    @GetMapping(value = "student/deleteByColumnNameStudentName")
+    public String deleteStudentByColumnNameStudentName(@RequestParam String name) {
+
+        studentService.deleteStudentByColumnNameStudentName(name);
+        return "Record of school table deleted successfully";
+    }
+
+
+
+
 
 
 

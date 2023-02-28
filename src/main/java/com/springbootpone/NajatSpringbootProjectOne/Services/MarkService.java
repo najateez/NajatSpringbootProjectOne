@@ -64,4 +64,19 @@ public class MarkService {
         return markRepository.getAllActiveMarks();
     }
 
+    // getAllNotActiveMarks :-
+    public List<Mark> getAllInActiveMarks(){
+
+        return markRepository.getAllInActiveMarks();
+    }
+
+    //deleteByColumnNameGrade
+    public void deleteMarkByColumnNameGrade(String grade){
+        Mark markToDelete = markRepository.getMarkByColumnNameGrade(grade); //just change in this line
+        //  School schoolToDelete = schoolRepository.findById(id).get();
+        markRepository.delete(markToDelete);
+    }
+
+
+
 }

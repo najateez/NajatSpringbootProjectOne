@@ -1,5 +1,6 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
+import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Services.MarkService;
@@ -54,4 +55,22 @@ public class MarkController {
         List<Mark> activeMarksList = markService.getAllActiveMarks();
         return activeMarksList;
     }
+
+    // getAllNotActiveCourses :-
+    @RequestMapping(value = "getAllMarksByIsActiveFalse")
+    public List<Mark> getAllInActiveMarks() {
+        List<Mark> notInActiveMarksList = markService.getAllInActiveMarks();
+        return notInActiveMarksList;
+    }
+
+    //deleteMarkByColumnNameGrade :-
+ @GetMapping(value = "mark/deleteByColumnNameGrade")
+    public String deleteMarkByColumnNameGrade(@RequestParam String grade) {
+
+        markService.deleteMarkByColumnNameGrade(grade);
+        return "Record of school table deleted successfully";
+    }
+
+
+
 }

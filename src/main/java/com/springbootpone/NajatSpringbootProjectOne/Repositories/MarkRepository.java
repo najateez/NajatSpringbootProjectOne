@@ -36,4 +36,13 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query(value = "SELECT mk from Mark mk where mk.isActive = true")
     List<Mark> getAllActiveMarks();
 
+    //getAllNotActiveMarks :-
+    @Query(value = "SELECT mrk from Mark mrk where mrk.isActive = false")
+    List<Mark> getAllInActiveMarks();
+
+
+    //getByColumnNameGrade .. here cove below just i added to use it for deleteByColumnNameGrade
+    @Query(value = "SELECT s from Mark s where s.grade = :grade")  // :grade -> for user input
+    Mark getMarkByColumnNameGrade(@Param("grade") String grade);
+
 }

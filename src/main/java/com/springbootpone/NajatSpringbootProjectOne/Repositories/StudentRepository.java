@@ -33,6 +33,10 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query(value = "SELECT s from Student s where s.isActive = true")
     List<Student> getAllActiveStudents();
 
+    //getAllNotActiveStudents :-
+    @Query(value = "SELECT s from Student s where s.isActive = false")
+    List<Student> getAllInActiveStudents();
+
 
 
 
