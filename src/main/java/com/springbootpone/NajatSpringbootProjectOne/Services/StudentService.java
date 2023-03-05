@@ -93,6 +93,12 @@ public class StudentService {
     }
 
 
+    public void getPutIsActiveFalseByStudentId(Integer id) {
+
+        studentRepository.getPutIsActiveFalseByStudentId(id);
+    }
+
+
 
 
 

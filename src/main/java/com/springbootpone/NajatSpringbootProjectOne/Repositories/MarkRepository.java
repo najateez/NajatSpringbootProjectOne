@@ -5,11 +5,13 @@ import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -44,5 +46,11 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     //getByColumnNameGrade .. here cove below just i added to use it for deleteByColumnNameGrade
     @Query(value = "SELECT s from Mark s where s.grade = :grade")  // :grade -> for user input
     Mark getMarkByColumnNameGrade(@Param("grade") String grade);
+
+    //deleteById--> they mean  MakeIsActiveFalseByCourseId
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Mark s SET s.isActive = false WHERE s.id =:markId")
+    void getPutIsActiveFalseByMarkId(@Param("markId") Integer id);
 
 }

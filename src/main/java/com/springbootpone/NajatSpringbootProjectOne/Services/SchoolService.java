@@ -83,20 +83,28 @@ public class SchoolService {
         schoolRepository.save(school);
     }
 
- /*  public void getPutisActiveFalseByIdSchools(boolean isActive, Integer id) throws ParseException {
 
 
-        School school = schoolRepository.getSchoolById(id);
 
-        if (school.getActive()== false) {
-            throw new RuntimeException("School is Already inActive!!");
-        }
+  /*  public School getIdToDeleteSchoolById(Integer id){
 
+        return schoolRepository.getPutIsActiveFalseSchoolById(id);
+    } */
+
+/* public void getPutIsActiveFalseSchoolById(Integer id)  {
+
+        School school = schoolRepository.getPutIsActiveFalseSchoolById(id);
         school.setActive(false);
-
         schoolRepository.save(school);
     } */
 
+
+    public void getPutIsActiveFalseBySchoolId(Integer id) {
+
+        schoolRepository.getPutIsActiveFalseBySchoolId(id); //here isActive will be false because of update query
+//        school.setActive(false);
+//        schoolRepository.save(school);
+    }
 
 
 }

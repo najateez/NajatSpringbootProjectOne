@@ -2,11 +2,13 @@ package com.springbootpone.NajatSpringbootProjectOne.Repositories;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -36,6 +38,12 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     //getAllNotActiveStudents :-
     @Query(value = "SELECT s from Student s where s.isActive = false")
     List<Student> getAllInActiveStudents();
+
+    //deleteById--> they mean  MakeIsActiveFalseByStudentId
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.id =:studentId")
+    void getPutIsActiveFalseByStudentId(@Param("studentId") Integer id);
 
 
 

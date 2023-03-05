@@ -89,5 +89,11 @@ public class CourseService {
         courseRepository.save(course);
     }
 
+    public void getPutIsActiveFalseByCourseId(Integer id) {
+
+        courseRepository.getPutIsActiveFalseByCourseId(id);
+    }
+
+
 
 }

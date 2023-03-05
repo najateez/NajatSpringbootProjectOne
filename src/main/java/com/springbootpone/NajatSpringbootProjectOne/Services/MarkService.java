@@ -91,6 +91,12 @@ public class MarkService {
         markRepository.save(mark);
     }
 
+    public void getPutIsActiveFalseByMarkId(Integer id) {
+
+        markRepository.getPutIsActiveFalseByMarkId(id);
+    }
+
+
 
 
 }

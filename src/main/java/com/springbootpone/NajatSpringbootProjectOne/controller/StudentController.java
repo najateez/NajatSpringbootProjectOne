@@ -77,6 +77,12 @@ public class StudentController {
         studentService.setCreatedDateByUserInput(date, id);
     }
 
+    //deleteById--> they mean  MakeIsActiveFalseBySchoolId
+    @RequestMapping(value = "deleteStudentByIdIsActiveFalse", method = RequestMethod.POST)
+    public void getPutIsActiveFalseByStudentId(@RequestParam Integer studentId) {
+        studentService.getPutIsActiveFalseByStudentId(studentId);
+    }
+
 
 
 

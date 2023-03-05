@@ -79,6 +79,12 @@ public class MarkController {
         markService.setCreatedDateByUserInput(date, id);
     }
 
+    //deleteById--> they mean  MakeIsActiveFalseByMarkId
+    @RequestMapping(value = "deleteMarkByIdIsActiveFalse", method = RequestMethod.POST)
+    public void getPutIsActiveFalseByMarkId(@RequestParam Integer markId) {
+        markService.getPutIsActiveFalseByMarkId(markId);
+    }
+
 
 
 }
