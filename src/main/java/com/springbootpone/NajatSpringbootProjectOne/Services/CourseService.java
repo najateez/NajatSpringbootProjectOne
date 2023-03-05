@@ -8,6 +8,10 @@ import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -73,6 +77,16 @@ public class CourseService {
         Course courseToDelete = courseRepository.getCourseByCourseName(name); //just change in this line
         //  School schoolToDelete = schoolRepository.findById(id).get();
         courseRepository.delete(courseToDelete);
+    }
+
+    //updateCreatedDateByUserInputForCourse :-
+    public void setCreatedDateByUserInput(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        Course course = courseRepository.getCourseById(id);
+        course.setCreatedDate(convertedDateFromStringToDateFormat);
+        courseRepository.save(course);
     }
 
 

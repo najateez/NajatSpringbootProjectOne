@@ -4,6 +4,7 @@ import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.SchoolRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
+import org.hibernate.hql.internal.ast.tree.DeleteStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +73,29 @@ public class SchoolService {
         schoolRepository.delete(schoolToDelete);
     }
 
+    //updateCreatedDateByUserInputForSchool :-
+  public void setCreatedDateByUserInput(String date, Integer id) throws ParseException {
 
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        School school = schoolRepository.getSchoolById(id);
+        school.setCreatedDate(convertedDateFromStringToDateFormat);
+        schoolRepository.save(school);
+    }
+
+ /*  public void getPutisActiveFalseByIdSchools(boolean isActive, Integer id) throws ParseException {
+
+
+        School school = schoolRepository.getSchoolById(id);
+
+        if (school.getActive()== false) {
+            throw new RuntimeException("School is Already inActive!!");
+        }
+
+        school.setActive(false);
+
+        schoolRepository.save(school);
+    } */
 
 
 

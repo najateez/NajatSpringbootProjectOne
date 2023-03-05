@@ -2,7 +2,7 @@ package com.springbootpone.NajatSpringbootProjectOne.Repositories;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
-import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +12,8 @@ import java.util.List;
 
 
 @Repository
-public interface SchoolRepository extends CrudRepository<School,Integer> {
+//public interface SchoolRepository extends CrudRepository<School,Integer> {
+    public interface SchoolRepository extends JpaRepository<School, Integer> {
 
     //to get output of table in screen : schoolRepositry->SchoolService->FirstController
     @Query("SELECT s from School s")  //sql query
@@ -34,6 +35,13 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     //getAllNotActiveSchools :-
     @Query(value = "SELECT s from School s where s.isActive = false")
     List<School> getAllInActiveSchools();
+
+    //put isActive=False for sepecific id :-
+ /*   @Query("update school s set s.isActive=False where e.id=?id")
+    School getPutIsActiveFalseSchoolById(@Param("id") Integer id); */
+
+
+
 
 
 

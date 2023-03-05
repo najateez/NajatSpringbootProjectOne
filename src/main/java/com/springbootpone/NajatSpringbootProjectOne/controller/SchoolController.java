@@ -98,5 +98,22 @@ public class SchoolController {
         return "Record of school table deleted successfully";
     }
 
+    //updateCreatedDateByUserInputForSchool :-
+    // for GET use @RequestParam. but for POST use @RequestBody .
+    //exp: localhost:8080/updateCreatedDateByUserInput?date=2222-10-11&id=2
+    @RequestMapping(value = "updateCreatedDateByUserInput")
+    public void setCreatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
+
+        schoolService.setCreatedDateByUserInput(date, id);
+    }
+
+
+
+
+
+
+
+
+
 
 }

@@ -3,10 +3,7 @@ package com.springbootpone.NajatSpringbootProjectOne.Models;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
@@ -29,6 +26,7 @@ class extends BaseEntity.  instead of writing same properties in all classes , a
     Date createdDate;
     @UpdateTimestamp
     Date updatedDate;
+
     Boolean isActive;
 
     public Date getCreatedDate() {

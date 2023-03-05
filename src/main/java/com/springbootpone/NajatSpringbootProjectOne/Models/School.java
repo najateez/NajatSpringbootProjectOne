@@ -1,12 +1,14 @@
 package com.springbootpone.NajatSpringbootProjectOne.Models;
 
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.servlet.annotation.WebServlet;
 import java.util.List;
 
 @Entity  //above each class should be Entity notation
+@Where(clause="is_active=1")
 public class School extends BaseEntity {
 
     @Id    //because primary key

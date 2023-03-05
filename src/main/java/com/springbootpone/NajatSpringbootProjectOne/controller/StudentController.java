@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -67,6 +68,13 @@ public class StudentController {
 
         studentService.deleteStudentByColumnNameStudentName(name);
         return "Record of school table deleted successfully";
+    }
+
+    //updateCreatedDateByUserInputForStudent :-
+    @RequestMapping(value = "student/updateCreatedDateByUserInput")
+    public void setCreatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
+
+        studentService.setCreatedDateByUserInput(date, id);
     }
 
 

@@ -9,6 +9,10 @@ import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -75,6 +79,16 @@ public class MarkService {
         Mark markToDelete = markRepository.getMarkByColumnNameGrade(grade); //just change in this line
         //  School schoolToDelete = schoolRepository.findById(id).get();
         markRepository.delete(markToDelete);
+    }
+
+    //updateCreatedDateByUserInputForMark :-
+    public void setCreatedDateByUserInput(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        Mark mark = markRepository.getMarkById(id);
+        mark.setCreatedDate(convertedDateFromStringToDateFormat);
+        markRepository.save(mark);
     }
 
 
