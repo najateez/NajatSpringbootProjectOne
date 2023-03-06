@@ -101,6 +101,7 @@ public class SchoolController {
     //updateCreatedDateByUserInputForSchool :-
     // for GET use @RequestParam. but for POST use @RequestBody .
     //exp: localhost:8080/updateCreatedDateByUserInput?date=2222-10-11&id=2
+    //POST
     @RequestMapping(value = "updateCreatedDateByUserInput")
     public void setCreatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
 
@@ -109,10 +110,20 @@ public class SchoolController {
 
     //deleteById--> they mean  MakeIsActiveFalseBySchoolId
     //exp: localhost:8080/deleteSchoolByIdIsActiveFalse?schoolId=2
+    //POST
     @RequestMapping(value = "deleteSchoolByIdIsActiveFalse", method = RequestMethod.POST)
     public void getPutIsActiveFalseBySchoolId(@RequestParam Integer schoolId) {
         schoolService.getPutIsActiveFalseBySchoolId(schoolId);
     }
+
+    //deleteByColumnName--> they mean  MakeIsActiveFalseBySchoolName
+    //exp: localhost:8080/school/deleteBySchoolNameIsActiveFalse?schoolName=abc
+    //POST
+    @RequestMapping(value = "school/deleteBySchoolNameIsActiveFalse", method = RequestMethod.POST)
+    public void getPutIsActiveFalseBySchoolColumnName(@RequestParam String schoolName) {
+        schoolService.getPutIsActiveFalseBySchoolColumnName(schoolName);
+    }
+
 
 
 

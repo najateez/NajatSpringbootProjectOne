@@ -94,6 +94,11 @@ public class CourseService {
         courseRepository.getPutIsActiveFalseByCourseId(id);
     }
 
+    public void getPutIsActiveFalseByCourseName(String name) {
+
+        courseRepository.getPutIsActiveFalseByCourseName(name);
+    }
+
 
 
 }

@@ -85,4 +85,10 @@ public class CourseController {
         courseService.getPutIsActiveFalseByCourseId(courseId);
     }
 
+    //deleteByColumnName--> they mean  MakeIsActiveFalseBySchoolName
+    @RequestMapping(value = "course/deleteByCourseNameIsActiveFalse", method = RequestMethod.POST)
+    public void getPutIsActiveFalseByCourseName(@RequestParam String courseName) {
+        courseService.getPutIsActiveFalseByCourseName(courseName);
+    }
+
 }

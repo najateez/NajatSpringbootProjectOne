@@ -85,6 +85,12 @@ public class MarkController {
         markService.getPutIsActiveFalseByMarkId(markId);
     }
 
+    //deleteByColumnName--> they mean  MakeIsActiveFalseByColumnName
+    @RequestMapping(value = "mark/deleteByObtainedMarksIsActiveFalse", method = RequestMethod.POST)
+    public void getPutIsActiveFalseByColumnNameObtainedMarks(@RequestParam Integer obtainedMarks) {
+        markService.getPutIsActiveFalseByColumnNameObtainedMarks(obtainedMarks);
+    }
+
 
 
 }

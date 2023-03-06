@@ -49,5 +49,10 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "UPDATE School s SET s.isActive = false WHERE s.id =:schoolId")
     void getPutIsActiveFalseBySchoolId(@Param("schoolId") Integer id);
 
+    //deleteByColumnName--> they mean  MakeIsActiveFalseBySchoolColumnName
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.isActive = false WHERE s.name =:schoolName")
+    void getPutIsActiveFalseBySchoolColumnName(@Param("schoolName") String name);
 
 }

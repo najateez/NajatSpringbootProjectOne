@@ -96,6 +96,11 @@ public class MarkService {
         markRepository.getPutIsActiveFalseByMarkId(id);
     }
 
+    public void getPutIsActiveFalseByColumnNameObtainedMarks(Integer obtainedMarks) {
+
+        markRepository.getPutIsActiveFalseByColumnNameObtainedMarks(obtainedMarks);
+    }
+
 
 
 

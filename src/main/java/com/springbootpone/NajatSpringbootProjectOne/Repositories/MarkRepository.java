@@ -53,4 +53,10 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query(value = "UPDATE Mark s SET s.isActive = false WHERE s.id =:markId")
     void getPutIsActiveFalseByMarkId(@Param("markId") Integer id);
 
+    //deleteByColumnName--> they mean  MakeIsActiveFalseByMarkColumnName
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Mark m SET m.isActive = false WHERE m.obtainedMarks =:obtainedMarks")
+    void getPutIsActiveFalseByColumnNameObtainedMarks(@Param("obtainedMarks") Integer obtainedMarks);
+
 }

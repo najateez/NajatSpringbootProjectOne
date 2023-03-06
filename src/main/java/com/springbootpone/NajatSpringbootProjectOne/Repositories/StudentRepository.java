@@ -45,6 +45,12 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.id =:studentId")
     void getPutIsActiveFalseByStudentId(@Param("studentId") Integer id);
 
+    //deleteByColumnName--> they mean  MakeIsActiveFalseByStudentColumnName
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.name =:studentName")
+    void getPutIsActiveFalseByStudentName(@Param("studentName") String name);
+
 
 
 

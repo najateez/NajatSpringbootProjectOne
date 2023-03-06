@@ -98,6 +98,11 @@ public class StudentService {
         studentRepository.getPutIsActiveFalseByStudentId(id);
     }
 
+    public void getPutIsActiveFalseByStudentName(String name) {
+
+        studentRepository.getPutIsActiveFalseByStudentName(name);
+    }
+
 
 
 
