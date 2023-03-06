@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 
 
-//@RestController
+@RestController
 public class MarkController {
 
     @Autowired
@@ -89,6 +89,28 @@ public class MarkController {
     @RequestMapping(value = "mark/deleteByObtainedMarksIsActiveFalse", method = RequestMethod.POST)
     public void getPutIsActiveFalseByColumnNameObtainedMarks(@RequestParam Integer obtainedMarks) {
         markService.getPutIsActiveFalseByColumnNameObtainedMarks(obtainedMarks);
+    }
+
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllMarks
+    //exp: localhost:8080/mark/deleteByAllPutIsActiveFalseByMarkForAll
+    @RequestMapping(value = "mark/deleteByAllPutIsActiveFalseByMarkForAll", method = RequestMethod.POST)
+    public void getPutIsActiveFalseForAllMarks() {
+        markService.getPutIsActiveFalseForAllMarks();
+    }
+
+    //updateMark :-
+    //exp: localhost:8080/mark/updateMark?obtainedMarks=96&markId=1
+    @RequestMapping(value = "mark/updateMark", method = RequestMethod.POST)
+    public void getUpdateMarkById(@RequestParam Integer markId, @RequestParam Integer obtainedMarks) {
+        markService.getUpdateMarkById(markId,obtainedMarks);
+    }
+
+    //getLatestRow
+    // exp: localhost:8080/mark/getLatestRowMark
+    @RequestMapping(value = "mark/getLatestRowMark")
+    public Mark getLatestRowMark() {
+        Mark mark = markService.getLatestRowMark();
+        return mark;
     }
 
 

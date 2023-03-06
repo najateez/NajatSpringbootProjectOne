@@ -91,4 +91,26 @@ public class CourseController {
         courseService.getPutIsActiveFalseByCourseName(courseName);
     }
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    //exp: localhost:8080/school/deleteByAllPutIsActiveFalseBySchoolForAll
+    @RequestMapping(value = "course/deleteByAllPutIsActiveFalseByCourseForAll", method = RequestMethod.POST)
+    public void getPutIsActiveFalseForAllCourses() {
+        courseService.getPutIsActiveFalseForAllCourses();
+    }
+
+    //updateCourse :-
+    //exp: localhost:8080/course/updateCourse?courseName=math&courseId=6
+    @RequestMapping(value = "course/updateCourse", method = RequestMethod.POST)
+    public void getUpdateCourseById(@RequestParam Integer courseId, @RequestParam String courseName) {
+        courseService.getUpdateCourseById(courseId,courseName);
+    }
+
+    //getLatestRow
+    // exp: localhost:8080/course/getLatestRowCourse
+    @RequestMapping(value = "course/getLatestRowCourse")
+    public Course getLatestRowCourse() {
+        Course course = courseService.getLatestRowCourse();
+        return course;
+    }
+
 }

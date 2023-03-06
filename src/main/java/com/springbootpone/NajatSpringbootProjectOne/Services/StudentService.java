@@ -103,6 +103,24 @@ public class StudentService {
         studentRepository.getPutIsActiveFalseByStudentName(name);
     }
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    public void getPutIsActiveFalseForAllStudents() {
+        studentRepository.getPutIsActiveFalseForAllStudents();
+        //    school.setActive(false);
+        //  schoolRepository.saveAll(schools);
+    }
+
+    public void getUpdateStudentById(Integer id,String name) {
+        studentRepository.getUpdateStudentById(id,name);
+        //    school.setActive(false);
+        //  schoolRepository.saveAll(schools);
+    }
+
+    public Student getLatestRowStudent() {
+
+        return studentRepository.getLatestRowStudent();
+    }
+
 
 
 

@@ -59,4 +59,22 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query(value = "UPDATE Mark m SET m.isActive = false WHERE m.obtainedMarks =:obtainedMarks")
     void getPutIsActiveFalseByColumnNameObtainedMarks(@Param("obtainedMarks") Integer obtainedMarks);
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllMarks
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Mark s SET s.isActive = false")
+    void getPutIsActiveFalseForAllMarks();
+
+    //updateSchool :-
+// https://www.baeldung.com/spring-data-partial-update -> i got query from here
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Mark s SET s.obtainedMarks=:obtainedMarks WHERE s.id =:markId")
+    void getUpdateMarkById(@Param("markId") Integer id,@Param("obtainedMarks") Integer obtainedMarks);
+
+
+    //getLatestRow :-
+    @Query("SELECT s FROM Mark s WHERE s.id =(SELECT MAX(s.id) FROM Mark s)")
+    Mark getLatestRowMark();
+
 }

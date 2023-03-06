@@ -1,18 +1,15 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
-import com.springbootpone.NajatSpringbootProjectOne.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.springbootpone.NajatSpringbootProjectOne.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
-@RestController
+//@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -123,6 +120,31 @@ public class SchoolController {
     public void getPutIsActiveFalseBySchoolColumnName(@RequestParam String schoolName) {
         schoolService.getPutIsActiveFalseBySchoolColumnName(schoolName);
     }
+
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    //exp: localhost:8080/school/deleteByAllPutIsActiveFalseBySchoolForAll
+    @RequestMapping(value = "school/deleteByAllPutIsActiveFalseBySchoolForAll", method = RequestMethod.POST)
+    public void getPutIsActiveFalseForAllSchools() {
+        schoolService.getPutIsActiveFalseForAllSchools();
+    }
+
+    //updateSchool :-
+    //exp: localhost:8080/school/updateSchool?schoolName=shambaqbaq&schoolId=59
+    @RequestMapping(value = "school/updateSchool", method = RequestMethod.POST)
+    public void getUpdateSchoolById(@RequestParam Integer schoolId, @RequestParam String schoolName) {
+        schoolService.getUpdateSchoolById(schoolId,schoolName);
+    }
+
+    //getLatestRow :-
+    // exp: localhost:8080/school/getLatestRowSchool
+    //POST
+    @RequestMapping(value = "school/getLatestRowSchool")
+    public School getLatestRowSchool() {
+        School school = schoolService.getLatestRowSchool();
+        return school;
+    }
+
+
 
 
 

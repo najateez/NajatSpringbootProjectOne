@@ -1,15 +1,16 @@
 package com.springbootpone.NajatSpringbootProjectOne.Repositories;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
-import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,5 +55,30 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Transactional
     @Query(value = "UPDATE School s SET s.isActive = false WHERE s.name =:schoolName")
     void getPutIsActiveFalseBySchoolColumnName(@Param("schoolName") String name);
+
+
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.isActive = false")
+    void getPutIsActiveFalseForAllSchools();
+
+    //updateSchool :-
+// https://www.baeldung.com/spring-data-partial-update -> i got query from here
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.name=:schoolName WHERE s.id =:schoolId")
+    void getUpdateSchoolById(@Param("schoolId") Integer id,@Param("schoolName") String name);
+
+
+    //getLatestRow :-
+    @Query("SELECT s FROM School s WHERE s.id =(SELECT MAX(s.id) FROM School s)")
+    School getLatestRowSchool();
+
+
+
+
+
+
 
 }

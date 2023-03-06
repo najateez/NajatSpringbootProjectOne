@@ -1,10 +1,8 @@
 package com.springbootpone.NajatSpringbootProjectOne.Services;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
-import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.SchoolRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
-import org.hibernate.hql.internal.ast.tree.DeleteStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SchoolService {
@@ -96,6 +93,29 @@ public class SchoolService {
 
         schoolRepository.getPutIsActiveFalseBySchoolColumnName(name);
     }
+
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    public void getPutIsActiveFalseForAllSchools() {
+        schoolRepository.getPutIsActiveFalseForAllSchools();
+      //    school.setActive(false);
+      //  schoolRepository.saveAll(schools);
+    }
+
+    public void getUpdateSchoolById(Integer id,String name) {
+        schoolRepository.getUpdateSchoolById(id,name);
+        //    school.setActive(false);
+        //  schoolRepository.saveAll(schools);
+    }
+
+    public School getLatestRowSchool() {
+
+        return schoolRepository.getLatestRowSchool();
+    }
+
+
+
+
+
 
 
 }

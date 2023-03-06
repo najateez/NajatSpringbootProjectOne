@@ -51,5 +51,23 @@ public interface CourseRepository extends CrudRepository<Course,Integer>{
     @Query(value = "UPDATE Course c SET c.isActive = false WHERE c.name =:courseName")
     void getPutIsActiveFalseByCourseName(@Param("courseName") String name);
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllCourses
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Course s SET s.isActive = false")
+    void getPutIsActiveFalseForAllCourses();
+
+    //updateSchool :-
+// https://www.baeldung.com/spring-data-partial-update -> i got query from here
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Course s SET s.name=:courseName WHERE s.id =:courseId")
+    void getUpdateCourseById(@Param("courseId") Integer id,@Param("courseName") String name);
+
+
+    //getLatestRow :-
+    @Query("SELECT s FROM Course s WHERE s.id =(SELECT MAX(s.id) FROM Course s)")
+    Course getLatestRowCourse();
+
 
 }

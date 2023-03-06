@@ -53,6 +53,26 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
 
 
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Student s SET s.isActive = false")
+    void getPutIsActiveFalseForAllStudents();
+
+    //updateSchool :-
+// https://www.baeldung.com/spring-data-partial-update -> i got query from here
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Student s SET s.name=:studentName WHERE s.id =:studentId")
+    void getUpdateStudentById(@Param("studentId") Integer id,@Param("studentName") String name);
+
+
+    //getLatestRow :-
+    @Query("SELECT s FROM Student s WHERE s.id =(SELECT MAX(s.id) FROM Student s)")
+    Student getLatestRowStudent();
+
+
+
 
 
 

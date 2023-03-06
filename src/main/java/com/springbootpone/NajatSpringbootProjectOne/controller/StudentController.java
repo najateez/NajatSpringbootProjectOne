@@ -89,6 +89,28 @@ public class StudentController {
         studentService.getPutIsActiveFalseByStudentName(studentName);
     }
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllStudents
+    //exp: localhost:8080/student/deleteByAllPutIsActiveFalseByStudentForAll
+    @RequestMapping(value = "student/deleteByAllPutIsActiveFalseByStudentForAll", method = RequestMethod.POST)
+    public void getPutIsActiveFalseForAllStudents() {
+        studentService.getPutIsActiveFalseForAllStudents();
+    }
+
+    //updateSchool :-
+    //exp: localhost:8080/student/updateStudent?studentName=aweeehah&studentId=18
+    @RequestMapping(value = "student/updateStudent", method = RequestMethod.POST)
+    public void getUpdateStudentById(@RequestParam Integer studentId, @RequestParam String studentName) {
+        studentService.getUpdateStudentById(studentId,studentName);
+    }
+
+    //getLatestRow
+    // exp: localhost:8080/student/getLatestRowStudent
+    @RequestMapping(value = "student/getLatestRowStudent")
+    public Student getLatestRowStudent() {
+        Student student = studentService.getLatestRowStudent();
+        return student;
+    }
+
 
 
 

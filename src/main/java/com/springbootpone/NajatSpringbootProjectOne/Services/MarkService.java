@@ -101,6 +101,24 @@ public class MarkService {
         markRepository.getPutIsActiveFalseByColumnNameObtainedMarks(obtainedMarks);
     }
 
+    //deleteByAll--> they mean  MakeIsActiveFalseForAllSchools
+    public void getPutIsActiveFalseForAllMarks() {
+        markRepository.getPutIsActiveFalseForAllMarks();
+        //    school.setActive(false);
+        //  schoolRepository.saveAll(schools);
+    }
+
+    public void getUpdateMarkById(Integer id,Integer obtainedMarks) {
+        markRepository.getUpdateMarkById(id,obtainedMarks);
+        //    school.setActive(false);
+        //  schoolRepository.saveAll(schools);
+    }
+
+    public Mark getLatestRowMark() {
+
+        return markRepository.getLatestRowMark();
+    }
+
 
 
 
