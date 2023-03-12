@@ -117,6 +117,12 @@ public class CourseService {
         return courseRepository.getLatestRowCourse();
     }
 
+    //getLatestUpdated
+    public Course getLatestUpdatedCourse() {
+        Course course = courseRepository.getLatestUpdatedCourse();
+        return course;
+    }
+
 
 
 }

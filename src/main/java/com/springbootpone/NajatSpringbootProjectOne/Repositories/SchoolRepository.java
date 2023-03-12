@@ -70,10 +70,18 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "UPDATE School s SET s.name=:schoolName WHERE s.id =:schoolId")
     void getUpdateSchoolById(@Param("schoolId") Integer id,@Param("schoolName") String name);
 
-
     //getLatestRow :-
     @Query("SELECT s FROM School s WHERE s.id =(SELECT MAX(s.id) FROM School s)")
     School getLatestRowSchool();
+
+    //getLatestUpdated
+  @Query(value ="SELECT s from School s where s.updatedDate = (SELECT max(s.updatedDate) from School s)")
+    School getLatestUpdatedSchool();
+
+    //getCreatedAfterDate
+/*    @Query(value ="SELECT s from School s where s.createdDate >=:createdDate")
+    List<School> getSchoolCreatedAfterDate(@Param("createdDate")Date createdDate); */
+
 
 
 

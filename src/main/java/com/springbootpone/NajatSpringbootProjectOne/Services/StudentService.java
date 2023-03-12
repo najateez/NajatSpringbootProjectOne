@@ -121,6 +121,12 @@ public class StudentService {
         return studentRepository.getLatestRowStudent();
     }
 
+    //getLatestUpdated
+    public Student getLatestUpdatedStudent() {
+        Student student = studentRepository.getLatestUpdatedStudent();
+        return student;
+    }
+
 
 
 

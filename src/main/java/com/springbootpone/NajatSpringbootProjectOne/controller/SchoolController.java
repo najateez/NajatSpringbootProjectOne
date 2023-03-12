@@ -1,6 +1,7 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
+import com.springbootpone.NajatSpringbootProjectOne.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.springbootpone.NajatSpringbootProjectOne.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-//@RestController
+@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -24,7 +25,7 @@ public class SchoolController {
      */
 
     @Autowired
-    SchoolService schoolService;
+    SchoolService schoolService;  //bean
 
     // for inserting : exp : localhost:8080
     @GetMapping
@@ -143,6 +144,21 @@ public class SchoolController {
         School school = schoolService.getLatestRowSchool();
         return school;
     }
+
+    //getLatestUpdated
+    //exp: localhost:8080/school/getLatestUpdatedSchool
+  @RequestMapping(value = "school/getLatestUpdatedSchool", method = RequestMethod.GET)
+    public School getLatestUpdatedSchool() {
+        School school = schoolService.getLatestUpdatedSchool();
+        return school;
+
+    } 
+
+/*    @RequestMapping(value = "school/getSchoolCreatedAfterDate", method = RequestMethod.GET)
+    public List<School> getSchoolCreatedAfterDate(@RequestParam SchoolRequestForCreateDateUpdate createdDate) throws ParseException {
+        List<School> school = schoolService.getSchoolCreatedAfterDate(createdDate.getDate());
+        return school;
+    } */
 
 
 

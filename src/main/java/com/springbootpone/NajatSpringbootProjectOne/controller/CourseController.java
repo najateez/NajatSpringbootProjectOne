@@ -113,4 +113,12 @@ public class CourseController {
         return course;
     }
 
+    //getLatestUpdated
+    @RequestMapping(value = "course/getLatestUpdatedCourse", method = RequestMethod.GET)
+    public Course getLatestUpdatedCourse() {
+        Course course = courseService.getLatestUpdatedCourse();
+        return course;
+
+    }
+
 }

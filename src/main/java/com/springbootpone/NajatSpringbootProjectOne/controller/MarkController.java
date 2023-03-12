@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 
 
-@RestController
+//@RestController
 public class MarkController {
 
     @Autowired
@@ -111,6 +111,14 @@ public class MarkController {
     public Mark getLatestRowMark() {
         Mark mark = markService.getLatestRowMark();
         return mark;
+    }
+
+    //getLatestUpdated
+    @RequestMapping(value = "mark/getLatestUpdatedMark", method = RequestMethod.GET)
+    public Mark getLatestUpdatedMark() {
+        Mark mark = markService.getLatestUpdatedMark();
+        return mark;
+
     }
 
 

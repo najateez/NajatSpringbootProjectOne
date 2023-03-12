@@ -77,4 +77,8 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query("SELECT s FROM Mark s WHERE s.id =(SELECT MAX(s.id) FROM Mark s)")
     Mark getLatestRowMark();
 
+    //getLatestUpdated
+    @Query(value ="SELECT s from Mark s where s.updatedDate = (SELECT max(s.updatedDate) from Mark s)")
+    Mark getLatestUpdatedMark();
+
 }

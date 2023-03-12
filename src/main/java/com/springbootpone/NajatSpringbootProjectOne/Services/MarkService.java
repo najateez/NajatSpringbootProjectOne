@@ -119,6 +119,12 @@ public class MarkService {
         return markRepository.getLatestRowMark();
     }
 
+    //getLatestUpdated
+    public Mark getLatestUpdatedMark() {
+        Mark mark = markRepository.getLatestUpdatedMark();
+        return mark;
+    }
+
 
 
 

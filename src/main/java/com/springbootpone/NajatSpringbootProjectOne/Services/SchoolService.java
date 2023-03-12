@@ -24,7 +24,7 @@ public class SchoolService {
 
         School schoolObj = new School();
         schoolObj.setName("madrasa");
-        schoolRepository.save(schoolObj);
+        schoolRepository.save(schoolObj); //for insert
     }
 
     //this getAllSchools list to show data from table to screen.
@@ -85,7 +85,7 @@ public class SchoolService {
 
         schoolRepository.getPutIsActiveFalseBySchoolId(id); //here isActive will be false because of update query
 //        school.setActive(false);
-//        schoolRepository.save(school);
+//        schoolRepository.save(school); //for update also
     }
 
     //deleteByColumnName--> they mean  MakeIsActiveFalseBySchoolColumnName
@@ -111,6 +111,27 @@ public class SchoolService {
 
         return schoolRepository.getLatestRowSchool();
     }
+
+    //getLatestUpdated
+    public School getLatestUpdatedSchool() {
+        School school = schoolRepository.getLatestUpdatedSchool();
+        return school;
+    }
+
+    //getCreatedAfterDate
+ /* public List<School> getSchoolCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<School> school = schoolRepository.getSchoolCreatedAfterDate(convertedDateFromStringToDateFormat);
+        return school;
+    } */
+
+
+
+
+
+
+
 
 
 

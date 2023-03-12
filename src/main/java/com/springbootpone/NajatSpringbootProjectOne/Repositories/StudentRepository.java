@@ -71,6 +71,10 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query("SELECT s FROM Student s WHERE s.id =(SELECT MAX(s.id) FROM Student s)")
     Student getLatestRowStudent();
 
+    //getLatestUpdated
+    @Query(value ="SELECT s from Student s where s.updatedDate = (SELECT max(s.updatedDate) from Student s)")
+    Student getLatestUpdatedStudent();
+
 
 
 

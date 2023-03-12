@@ -111,6 +111,14 @@ public class StudentController {
         return student;
     }
 
+    //getLatestUpdated
+    @RequestMapping(value = "student/getLatestUpdatedStudent", method = RequestMethod.GET)
+    public Student getLatestUpdatedStudent() {
+        Student student = studentService.getLatestUpdatedStudent();
+        return student;
+
+    }
+
 
 
 
