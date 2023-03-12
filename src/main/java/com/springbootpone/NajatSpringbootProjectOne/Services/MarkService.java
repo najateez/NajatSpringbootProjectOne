@@ -125,6 +125,14 @@ public class MarkService {
         return mark;
     }
 
+    //getCreatedAfterDate
+    public List<Mark> getCreatedAfterDateMark(String createdDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd"); // to change the format of the date
+        Date convertedDateFromStringToDateFormat = dateFormatter.parse(createdDate);
+        List<Mark> mark = markRepository.getCreatedAfterDateMark(convertedDateFromStringToDateFormat);
+        return mark;
+    }
+
 
 
 

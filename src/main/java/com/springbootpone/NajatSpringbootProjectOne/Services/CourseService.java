@@ -123,6 +123,14 @@ public class CourseService {
         return course;
     }
 
+    //getCreatedAfterDate
+    public List<Course> getCreatedAfterDateCourse(String createdDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd"); // to change the format of the date
+        Date convertedDateFromStringToDateFormat = dateFormatter.parse(createdDate);
+        List<Course> course = courseRepository.getCreatedAfterDateCourse(convertedDateFromStringToDateFormat);
+        return course;
+    }
+
 
 
 }

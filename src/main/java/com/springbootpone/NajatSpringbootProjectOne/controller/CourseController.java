@@ -118,7 +118,14 @@ public class CourseController {
     public Course getLatestUpdatedCourse() {
         Course course = courseService.getLatestUpdatedCourse();
         return course;
-
     }
+
+    //getCreatedAfterDate
+    @RequestMapping(value = "course/getCourseCreatedAfterDate", method = RequestMethod.GET)
+    public List<Course> getCreatedAfterDateCourse(@RequestParam String createdDate) throws ParseException {
+        List<Course> createdAfterDate = courseService.getCreatedAfterDateCourse(createdDate);
+        return createdAfterDate;
+    }
+
 
 }

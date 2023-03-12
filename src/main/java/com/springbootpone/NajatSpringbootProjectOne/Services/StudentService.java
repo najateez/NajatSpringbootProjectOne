@@ -127,6 +127,14 @@ public class StudentService {
         return student;
     }
 
+    //getCreatedAfterDate
+    public List<Student> getCreatedAfterDateStudent(String createdDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd"); // to change the format of the date
+        Date convertedDateFromStringToDateFormat = dateFormatter.parse(createdDate);
+        List<Student> student = studentRepository.getCreatedAfterDateStudent(convertedDateFromStringToDateFormat);
+        return student;
+    }
+
 
 
 

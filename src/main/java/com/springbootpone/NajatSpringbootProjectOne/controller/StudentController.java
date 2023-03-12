@@ -116,8 +116,15 @@ public class StudentController {
     public Student getLatestUpdatedStudent() {
         Student student = studentService.getLatestUpdatedStudent();
         return student;
-
     }
+
+    //getCreatedAfterDate
+    @RequestMapping(value = "student/getStudentCreatedAfterDate", method = RequestMethod.GET)
+    public List<Student> getCreatedAfterDateStudent(@RequestParam String createdDate) throws ParseException {
+        List<Student> createdAfterDate = studentService.getCreatedAfterDateStudent(createdDate);
+        return createdAfterDate;
+    }
+
 
 
 

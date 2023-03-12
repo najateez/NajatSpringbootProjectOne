@@ -119,12 +119,12 @@ public class SchoolService {
     }
 
     //getCreatedAfterDate
- /* public List<School> getSchoolCreatedAfterDate(String date) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date convertedDateFromStringToDateFormat = formatter.parse(date);
-        List<School> school = schoolRepository.getSchoolCreatedAfterDate(convertedDateFromStringToDateFormat);
-        return school;
-    } */
+    public List<School> getCreatedAfterDateSchool(String createdDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd"); // to change the format of the date
+        Date convertedDateFromStringToDateFormat = dateFormatter.parse(createdDate);
+        List<School> schools = schoolRepository.getCreatedAfterDateSchool(convertedDateFromStringToDateFormat);
+        return schools;
+    }
 
 
 

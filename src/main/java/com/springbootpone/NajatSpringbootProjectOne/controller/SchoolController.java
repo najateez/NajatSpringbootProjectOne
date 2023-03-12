@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-@RestController
+//@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -152,13 +152,14 @@ public class SchoolController {
         School school = schoolService.getLatestUpdatedSchool();
         return school;
 
-    } 
+    }
 
-/*    @RequestMapping(value = "school/getSchoolCreatedAfterDate", method = RequestMethod.GET)
-    public List<School> getSchoolCreatedAfterDate(@RequestParam SchoolRequestForCreateDateUpdate createdDate) throws ParseException {
-        List<School> school = schoolService.getSchoolCreatedAfterDate(createdDate.getDate());
-        return school;
-    } */
+    //getCreatedAfterDate
+    @RequestMapping(value = "school/getSchoolCreatedAfterDate", method = RequestMethod.GET)
+    public List<School> getCreatedAfterDateSchool(@RequestParam String createdDate) throws ParseException {
+        List<School> createdAfterDate = schoolService.getCreatedAfterDateSchool(createdDate);
+        return createdAfterDate;
+    }
 
 
 

@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 
 
-//@RestController
+@RestController
 public class MarkController {
 
     @Autowired
@@ -118,8 +118,15 @@ public class MarkController {
     public Mark getLatestUpdatedMark() {
         Mark mark = markService.getLatestUpdatedMark();
         return mark;
-
     }
+
+    //getCreatedAfterDate
+    @RequestMapping(value = "mark/getMarkCreatedAfterDate", method = RequestMethod.GET)
+    public List<Mark> getCreatedAfterDateMark(@RequestParam String createdDate) throws ParseException {
+        List<Mark> createdAfterDate = markService.getCreatedAfterDateMark(createdDate);
+        return createdAfterDate;
+    }
+
 
 
 

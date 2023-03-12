@@ -79,8 +79,11 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     School getLatestUpdatedSchool();
 
     //getCreatedAfterDate
-/*    @Query(value ="SELECT s from School s where s.createdDate >=:createdDate")
-    List<School> getSchoolCreatedAfterDate(@Param("createdDate")Date createdDate); */
+    /* getCreatedAfterDate -> means write createdDate from db in postman, and should appear output the dates after
+        date entered.
+     */
+    @Query("SELECT s from School s where s.createdDate > :createdDate")
+    List<School> getCreatedAfterDateSchool(Date createdDate);
 
 
 
