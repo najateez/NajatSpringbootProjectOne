@@ -80,6 +80,10 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query("SELECT s from Student s where s.createdDate > :createdDate")
     List<Student> getCreatedAfterDateStudent(Date createdDate);
 
+    //getSchoolByNumberOfStudents
+ /*   @Query(value = "SELECT COUNT(id) From student where school_id = ?2", nativeQuery = true)
+    Integer getCountOfStudentsBySchoolId(Integer schoolId); */
+
 
 
 

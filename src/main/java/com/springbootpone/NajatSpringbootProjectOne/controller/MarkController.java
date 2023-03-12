@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 
 
-@RestController
+//@RestController
 public class MarkController {
 
     @Autowired

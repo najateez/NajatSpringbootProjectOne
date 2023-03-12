@@ -161,6 +161,18 @@ public class SchoolController {
         return createdAfterDate;
     }
 
+    //getSchoolByNumberOfStudents -> means how many students in one school
+    /* for this situation we will use StudentRepository,SchoolService,SchoolController.To do count how many
+       students. from student table.
+     */
+
+
+
+
+
+
+
+
 
 
 
