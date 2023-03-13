@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-//@RestController
+@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -162,29 +162,21 @@ public class SchoolController {
     }
 
     //getSchoolByNumberOfStudents -> means how many students in one school
-    /* for this situation we will use StudentRepository,SchoolService,SchoolController.To do count how many
-       students. from student table.
+    /* for this situation we will use StudentRepository,SchoolService,SchoolController.
+
+            //exp: count similar school_id in student table and write it in postman.
+          exp: localhost:8080/school/getSchoolByNumberOfStudent?numberOfStudent=4            //for school_id=59
+
+    check from student table school id, count similar number and write in link numberOfStudent=4. the original school_id=59
      */
 
+    //getSchoolByNumberOfStudents
+    @RequestMapping(value = "school/getSchoolByNumberOfStudent", method = RequestMethod.POST)
+    public List<School> getSchoolByNumberOfStudent(@RequestParam Integer numberOfStudent) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        List<School> schoolList=schoolService.getSchoolByNumberOfStudent(numberOfStudent);
+        return schoolList;
+    }
 
 
 

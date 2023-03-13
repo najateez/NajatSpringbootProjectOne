@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -126,21 +127,23 @@ public class SchoolService {
         return schools;
     }
 
+    //getSchoolByNumberOfStudents
+    public List<School> getSchoolByNumberOfStudent(Integer numberOfStudent ) {
 
+        List<Integer> typesOfSchoolIdsInStudent = studentRepository.getDistinctSchoolIdsFromStudent();
 
+        List<Integer> schoolIdsThatUserWants = new ArrayList<>();
+        for (Integer idOfSchool : typesOfSchoolIdsInStudent) {
+            Integer count = studentRepository.getCountOfStudentsBySchoolId(idOfSchool);
 
+            if (numberOfStudent == count) {
+                schoolIdsThatUserWants.add(idOfSchool);
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+        List<School> schoolThatUserWasLookingFor = schoolRepository.findAllById(schoolIdsThatUserWants);
+        return schoolThatUserWasLookingFor;
+    }
 
 
 }
