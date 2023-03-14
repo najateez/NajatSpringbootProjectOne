@@ -85,6 +85,13 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query("SELECT s from School s where s.createdDate > :createdDate")
     List<School> getCreatedAfterDateSchool(Date createdDate);
 
+    //UpdateIsActiveTrueBySchoolId
+    //@Modifying and @Transactional used when we want to update something
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.isActive = true WHERE s.id =:schoolId")
+    void getUpdateIsActiveTrueBySchoolId(@Param("schoolId") Integer id);
+
 
 
 

@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 
 
-//@RestController
+@RestController
 public class MarkController {
 
     @Autowired
@@ -125,6 +125,36 @@ public class MarkController {
     public List<Mark> getCreatedAfterDateMark(@RequestParam String createdDate) throws ParseException {
         List<Mark> createdAfterDate = markService.getCreatedAfterDateMark(createdDate);
         return createdAfterDate;
+    }
+
+    //UpdateIsActiveTrueBySchoolId
+    @RequestMapping(value = "mark/updateIsActiveToTrueByMarkId", method = RequestMethod.POST)
+    public void getUpdateIsActiveTrueByMarkId(@RequestParam Integer markId) {
+        markService.getUpdateIsActiveTrueByMarkId(markId);
+    }
+
+    //updateUpdatedDateByUserInputForMark :-
+    //exp: localhost:8080/mark/updateUpdatedDateByUserInput?date=1234-12-11&id=1
+    @RequestMapping(value = "mark/updateUpdatedDateByUserInput")
+    public void setUpdateUpdatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
+
+        markService.setUpdateUpdatedDateByUserInput(date, id);
+    }
+
+    //getByObtainedMarksMoreThan
+    //exp: localhost:8080/mark/getByObtainedMarksMoreThan?obtainedMarks=30
+    @RequestMapping(value = "mark/getByObtainedMarksMoreThan", method = RequestMethod.GET)
+    public List<Mark> getByObtainedMarksMoreThan(@RequestParam Integer obtainedMarks) {
+
+        return markService.getByObtainedMarksMoreThan(obtainedMarks);
+    }
+
+    //getByObtainedMarksLessThan
+    //exp: localhost:8080/mark/getByObtainedMarksLessThan?obtainedMarks=30
+    @RequestMapping(value = "mark/getByObtainedMarksLessThan", method = RequestMethod.GET)
+    public List<Mark> getByObtainedMarksLessThan(@RequestParam Integer obtainedMarks) {
+
+        return markService.getByObtainedMarksLessThan(obtainedMarks);
     }
 
 

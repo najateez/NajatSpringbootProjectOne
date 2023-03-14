@@ -131,6 +131,22 @@ public class CourseService {
         return course;
     }
 
+    //UpdateIsActiveTrueBySchoolId
+    public void getUpdateIsActiveTrueByCourseId(Integer id) {
+
+        courseRepository.getUpdateIsActiveTrueByCourseId(id);
+    }
+
+    //updateUpdatedDateById
+    public void setUpdateUpdatedDateByUserInput(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        Course course = courseRepository.getCourseById(id);
+        course.setUpdatedDate(convertedDateFromStringToDateFormat);
+        courseRepository.save(course);
+    }
+
 
 
 }

@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-@RestController
+//@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -176,6 +176,22 @@ public class SchoolController {
 
         List<School> schoolList=schoolService.getSchoolByNumberOfStudent(numberOfStudent);
         return schoolList;
+    }
+
+    //UpdateIsActiveTrueBySchoolId
+    @RequestMapping(value = "school/updateIsActiveToTrueBySchoolId", method = RequestMethod.POST)
+    public void getUpdateIsActiveTrueBySchoolId(@RequestParam Integer schoolId) {
+        schoolService.getUpdateIsActiveTrueBySchoolId(schoolId);
+    }
+
+    //updateUpdatedDateByUserInputForSchool :-
+    // for GET use @RequestParam. but for POST use @RequestBody .
+    //exp: localhost:8080/updateUpdatedDateByUserInput?date=2222-10-11&id=2
+    //POST
+        @RequestMapping(value = "school/updateUpdatedDateByUserInput")
+    public void setUpdateUpdatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
+
+        schoolService.setUpdateUpdatedDateByUserInput(date, id);
     }
 
 

@@ -27,8 +27,8 @@ public class MarkService {
     public void addMark(){
 
         Mark markObj=new Mark();
-        markObj.setObtainedMarks(93);
-        markObj.setGrade("excellent");
+        markObj.setObtainedMarks(9);
+        markObj.setGrade("fail");
         markRepository.save(markObj);
     }
 
@@ -132,6 +132,37 @@ public class MarkService {
         List<Mark> mark = markRepository.getCreatedAfterDateMark(convertedDateFromStringToDateFormat);
         return mark;
     }
+
+    //UpdateIsActiveTrueBySchoolId
+    public void getUpdateIsActiveTrueByMarkId(Integer id) {
+
+        markRepository.getUpdateIsActiveTrueByMarkId(id);
+    }
+
+    //updateUpdatedDateById
+    public void setUpdateUpdatedDateByUserInput(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        Mark mark = markRepository.getMarkById(id);
+        mark.setUpdatedDate(convertedDateFromStringToDateFormat);
+        markRepository.save(mark);
+    }
+
+    //getByObtainedMarksMoreThan
+    public List<Mark> getByObtainedMarksMoreThan(Integer obtainedMarks){
+        List<Mark>  mark = markRepository.getByObtainedMarksMoreThan(obtainedMarks);
+        return mark;
+    }
+
+    //getByObtainedMarksLessThan
+    public List<Mark> getByObtainedMarksLessThan(Integer obtainedMarks){
+        List<Mark>  mark = markRepository.getByObtainedMarksLessThan(obtainedMarks);
+        return mark;
+    }
+
+
+
 
 
 

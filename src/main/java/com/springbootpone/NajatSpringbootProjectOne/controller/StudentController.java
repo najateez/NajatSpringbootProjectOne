@@ -125,6 +125,19 @@ public class StudentController {
         return createdAfterDate;
     }
 
+    //UpdateIsActiveTrueByStudentId
+    @RequestMapping(value = "student/updateIsActiveToTrueByStudentId", method = RequestMethod.POST)
+    public void getUpdateIsActiveTrueByStudentId(@RequestParam Integer studentId) {
+        studentService.getUpdateIsActiveTrueByStudentId(studentId);
+    }
+
+    //updateUpdatedDateByUserInputForStudent :-
+    @RequestMapping(value = "student/updateUpdatedDateByUserInput")
+    public void setUpdateUpdatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
+
+        studentService.setUpdateUpdatedDateByUserInput(date, id);
+    }
+
 
 
 

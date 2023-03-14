@@ -135,6 +135,22 @@ public class StudentService {
         return student;
     }
 
+    //UpdateIsActiveTrueBySchoolId
+    public void getUpdateIsActiveTrueByStudentId(Integer id) {
+
+        studentRepository.getUpdateIsActiveTrueByStudentId(id);
+    }
+
+    //updateUpdatedDateById
+    public void setUpdateUpdatedDateByUserInput(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        Student student = studentRepository.getStudentById(id);
+        student.setUpdatedDate(convertedDateFromStringToDateFormat);
+        studentRepository.save(student);
+    }
+
 
 
 

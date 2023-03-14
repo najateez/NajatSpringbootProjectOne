@@ -127,5 +127,19 @@ public class CourseController {
         return createdAfterDate;
     }
 
+    //UpdateIsActiveTrueByCourseId
+    @RequestMapping(value = "course/updateIsActiveToTrueByCourseId", method = RequestMethod.POST)
+    public void getUpdateIsActiveTrueByCourseId(@RequestParam Integer courseId) {
+        courseService.getUpdateIsActiveTrueByCourseId(courseId);
+    }
+
+    //updateUpdatedDateByUserInputForCourse :-
+    //exp: localhost:8080/course/updateUpdatedDateByUserInput?date=1234-12-11&id=6
+    @RequestMapping(value = "course/updateUpdatedDateByUserInput")
+    public void setUpdateUpdatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
+
+        courseService.setUpdateUpdatedDateByUserInput(date, id);
+    }
+
 
 }

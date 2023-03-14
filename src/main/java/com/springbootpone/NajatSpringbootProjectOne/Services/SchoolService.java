@@ -145,5 +145,21 @@ public class SchoolService {
         return schoolThatUserWasLookingFor;
     }
 
+    //UpdateIsActiveTrueBySchoolId
+    public void getUpdateIsActiveTrueBySchoolId(Integer id) {
+
+        schoolRepository.getUpdateIsActiveTrueBySchoolId(id);
+    }
+
+    //updateUpdatedDateById
+    public void setUpdateUpdatedDateByUserInput(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        School school = schoolRepository.getSchoolById(id);
+        school.setUpdatedDate(convertedDateFromStringToDateFormat);
+        schoolRepository.save(school);
+    }
+
 
 }

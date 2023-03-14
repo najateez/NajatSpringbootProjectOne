@@ -86,6 +86,13 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
     @Query(value = "SELECT COUNT(id) From student where school_id =:schoolId", nativeQuery = true)
     Integer getCountOfStudentsBySchoolId(Integer schoolId);
 
+ //UpdateIsActiveTrueByStudentId
+ //@Modifying and @Transactional used when we want to update something
+ @Modifying
+ @Transactional
+ @Query(value = "UPDATE Student s SET s.isActive = true WHERE s.id =:studentId")
+ void getUpdateIsActiveTrueByStudentId(@Param("studentId") Integer id);
+
 
 
 

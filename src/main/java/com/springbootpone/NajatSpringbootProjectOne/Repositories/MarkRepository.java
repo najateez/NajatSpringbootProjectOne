@@ -86,4 +86,22 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query("SELECT s from Mark s where s.createdDate > :createdDate")
     List<Mark> getCreatedAfterDateMark(Date createdDate);
 
+    //UpdateIsActiveTrueBySchoolId
+    //@Modifying and @Transactional used when we want to update something
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Mark s SET s.isActive = true WHERE s.id =:markId")
+    void getUpdateIsActiveTrueByMarkId(@Param("markId") Integer id);
+
+    //getByObtainedMarksMoreThan
+    @Query("SELECT s from Mark s where s.obtainedMarks > :obtainedMarks")
+    List<Mark> getByObtainedMarksMoreThan(Integer obtainedMarks);
+
+    //getByObtainedMarksLessThan
+    @Query("SELECT s from Mark s where s.obtainedMarks < :obtainedMarks")
+    List<Mark> getByObtainedMarksLessThan(Integer obtainedMarks);
+
+
+
+
 }

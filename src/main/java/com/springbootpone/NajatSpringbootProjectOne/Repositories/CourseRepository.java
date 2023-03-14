@@ -78,5 +78,12 @@ public interface CourseRepository extends CrudRepository<Course,Integer>{
     @Query("SELECT s from Course s where s.createdDate > :createdDate")
     List<Course> getCreatedAfterDateCourse(Date createdDate);
 
+    //UpdateIsActiveTrueBySchoolId
+    //@Modifying and @Transactional used when we want to update something
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Course s SET s.isActive = true WHERE s.id =:courseId")
+    void getUpdateIsActiveTrueByCourseId(@Param("courseId") Integer id);
+
 
 }
