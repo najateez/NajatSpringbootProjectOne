@@ -8,6 +8,7 @@ import com.springbootpone.NajatSpringbootProjectOne.Repositories.CourseRepositor
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -160,6 +161,36 @@ public class MarkService {
         List<Mark>  mark = markRepository.getByObtainedMarksLessThan(obtainedMarks);
         return mark;
     }
+
+    //addNewMarkDependOfMarkInput
+    public void addNewMarkDependOfMarkInput (@RequestParam String grade, @RequestParam Integer obtainedMarks, @RequestParam Boolean isActive) {
+
+        Mark mObj = new Mark();
+        mObj.setGrade(grade);
+        mObj.setObtainedMarks(obtainedMarks);
+        mObj.setActive(isActive);
+        markRepository.save(mObj);
+    }
+
+    //getMarkByCreatedDate
+    //note: always date we will convert it to string, with parseException
+    public List<Mark> getMarkByCreatedDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        List<Mark> mark = markRepository.getMarkByCreatedDate(convertedDateFromStringToDateFormat);
+        return mark;
+    }
+
+    //deleteMarkByCreatedDate -> put isActive false by createdDate :-
+    public void getUpdateIsActiveFalseByCreatedDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        markRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
+    }
+
+
 
 
 

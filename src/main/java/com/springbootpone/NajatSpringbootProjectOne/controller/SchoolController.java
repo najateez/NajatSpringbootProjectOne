@@ -194,6 +194,51 @@ public class SchoolController {
         schoolService.setUpdateUpdatedDateByUserInput(date, id);
     }
 
+    //addNewSchoolDependOfSchoolInput
+    //exp: localhost:8080/school/addNewSchoolDependOfSchoolInput?schoolName=twixxxia&isActive=true
+    //used SchoolService, schoolController.
+    //same as previous code of addSchool() but with parameter.
+    @RequestMapping(value = "school/addNewSchoolDependOfSchoolInput", method = RequestMethod.POST)
+    public void addNewSchoolDependOfSchoolInput(@RequestParam String schoolName, @RequestParam Boolean isActive) {
+
+        schoolService.addNewSchoolDependOfSchoolInput(schoolName,isActive);
+    }
+
+    //getSchoolByCreatedDate :-
+    //exp: localhost:8080/school/getSchoolByCreatedDate?createdDate=7575-12-11 00:00:00.0000000
+    //note: always date we will convert it to string, with parseException
+   @RequestMapping(value = "school/getSchoolByCreatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolByCreatedDate(@RequestParam String createdDate) throws ParseException {
+       List<School> school = schoolService.getSchoolByCreatedDate(createdDate);
+        return school;
+    }
+
+
+    //getSchoolByUpdatedDate
+ /*   @RequestMapping(value = "school/getSchoolByUpdatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<School> school = schoolService.getSchoolByUpdatedDate(updatedDate);
+        return school;
+    } */
+
+
+    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    //exp: localhost:8080/school/UpdateIsActiveFalseByCreatedDate?createdDate=7575-12-11 00:00:00.0000000
+    @RequestMapping(value = "school/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
+         schoolService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    }
+
+    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+ /*   @RequestMapping(value = "school/UpdateIsActiveFalseByUpdatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByUpdatedDate(@RequestParam String updatedDate) throws ParseException{
+        schoolService.getUpdateIsActiveFalseByUpdatedDate(updatedDate);
+    } */
+
+
+
+
+
 
 
 }

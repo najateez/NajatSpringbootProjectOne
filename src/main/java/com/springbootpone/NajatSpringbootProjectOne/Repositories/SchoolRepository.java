@@ -92,6 +92,38 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "UPDATE School s SET s.isActive = true WHERE s.id =:schoolId")
     void getUpdateIsActiveTrueBySchoolId(@Param("schoolId") Integer id);
 
+    //getSchoolByCreatedDate
+   @Query(value = "SELECT s from School s where s.createdDate =:createdDate")
+   List<School> getSchoolByCreatedDate(@Param("createdDate") Date createdDate);
+
+
+
+    //getSchoolByUpdatedDate
+ /*  @Query(value = "SELECT s from School s where s.updatedDate =:updatedDate")
+    List<School> getSchoolByUpdatedDate(@Param("updatedDate") Date updatedDate); */
+
+
+
+    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    //Note: if you use @Modifying notation, use all void in(Repository,Service,Controller). ALWAYS.
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.isActive = false WHERE s.createdDate =:createdDate")
+    void getUpdateIsActiveFalseByCreatedDate(@Param("createdDate") Date createdDate);
+
+    //deleteSchoolsByUpdatedDate -> put isActive false by UpdatedDate :-
+/*    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.isActive = false WHERE s.updatedDate =:updatedDate")
+    void getUpdateIsActiveFalseByUpdatedDate(@Param("updatedDate") Date updatedDate); */
+
+    //deleteAllSchoolsCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+
+
+
+
+
+
 
 
 

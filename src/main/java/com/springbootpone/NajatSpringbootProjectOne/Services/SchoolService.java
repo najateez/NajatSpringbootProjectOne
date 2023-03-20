@@ -5,6 +5,8 @@ import com.springbootpone.NajatSpringbootProjectOne.Repositories.SchoolRepositor
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -160,6 +162,56 @@ public class SchoolService {
         school.setUpdatedDate(convertedDateFromStringToDateFormat);
         schoolRepository.save(school);
     }
+
+    //addNewSchoolDependOfSchoolInput
+    public void addNewSchoolDependOfSchoolInput (@RequestParam String schoolName, @RequestParam Boolean isActive) {
+
+        School sObj = new School();
+        sObj.setName(schoolName);
+        sObj.setActive(isActive);
+        schoolRepository.save(sObj);
+    }
+
+    //getSchoolByCreatedDate
+    //note: always date we will convert it to string, with parseException
+    public List<School> getSchoolByCreatedDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        List<School> school = schoolRepository.getSchoolByCreatedDate(convertedDateFromStringToDateFormat);
+        return school;
+    }
+
+
+
+    //getSchoolByUpdatedDate
+/*    public List<School> getSchoolByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        List<School> school = schoolRepository.getSchoolByUpdatedDate(convertedDateFromStringToDateFormat);
+        return school;
+    } */
+
+
+
+    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    public void getUpdateIsActiveFalseByCreatedDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+            schoolRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
+    }
+
+    //deleteSchoolsByUpdatedDate -> put isActive false by UpdatedDate :-
+  /*  public void getUpdateIsActiveFalseByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+           schoolRepository.getUpdateIsActiveFalseByUpdatedDate(convertedDateFromStringToDateFormat);
+    }  */
+
+
 
 
 }

@@ -20,6 +20,11 @@ import java.util.List;
   you can find your ip . cmd -> ipconfig -> IPv4 Address. . . . . . . . . . . : 192.168.100.69 .
  */
 
+/* To send normal text to slack, should firstContoller works.
+    exp: localhost:8080/slackMessage?text=fdsfjshambaqbaq
+    Use GET
+ */
+
 @RestController
 public class FirstController {
 
@@ -61,7 +66,8 @@ public class FirstController {
     } */
 
 
-    //for Slack Message
+    //-------------------- for Slack Message-------------------
+    //make sure in application.properties there is password, and in slackClient, you add channel(URI).
     @Autowired
     SlackClient slackClient;
 
@@ -75,7 +81,7 @@ public class FirstController {
         slackClient.sendMessage(text);
     }
 
-    //end for Slack Message
+    //--------------- end for Slack Message ---------------------
 
 
     //getAllSchoolToSlackApi
@@ -243,6 +249,24 @@ public class FirstController {
         return schoolList;
     }
 
+    //getSchoolByCreatedDate :-
+    //exp: localhost:8080/school/getSchoolByCreatedDate?createdDate=7575-12-11 00:00:00.0000000
+    @RequestMapping(value = "school/getSchoolByCreatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<School> school = schoolService.getSchoolByCreatedDate(createdDate);
+
+        slackClient.sendMessage("--- school data from db to slack (api). school/getSchoolByCreatedDate ---");
+        for (School s : school) {
+            slackClient.sendMessage("school id:" + s.getId());
+            slackClient.sendMessage("school name:" + s.getName());
+            slackClient.sendMessage("school CreatedDate:" + s.getCreatedDate());
+            slackClient.sendMessage("school isActive:" + s.getActive());
+            slackClient.sendMessage("school UpdatedDate:" + s.getUpdatedDate());
+        }
+
+        return school;
+    }
+
     // -------------- for student table ----------------------------
 
     //getAllToSlack
@@ -379,7 +403,7 @@ public class FirstController {
     public List<Student> getCreatedAfterDateStudent(@RequestParam String createdDate) throws ParseException {
         List<Student> createdAfterDate = studentService.getCreatedAfterDateStudent(createdDate);
 
-        slackClient.sendMessage("--- student data from db to slack (api). getAllStudentsByIsActiveFalse ---");
+        slackClient.sendMessage("--- student data from db to slack (api). student/getStudentCreatedAfterDate ---");
         for (Student stu : createdAfterDate) {
             slackClient.sendMessage("student id:" + stu.getId());
             slackClient.sendMessage("student name:" + stu.getName());
@@ -390,6 +414,26 @@ public class FirstController {
             //   slackClient.sendMessage("school id:"+ stu.getSchool());
         }
         return createdAfterDate;
+    }
+
+    //getStudentByCreatedDate :-
+    //exp: localhost:8080/student/getStudentByCreatedDate?createdDate=2012-06-02 00:00:00.0000000
+    @RequestMapping(value = "student/getStudentByCreatedDate", method = RequestMethod.GET)
+    public List<Student> getStudentByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Student> student = studentService.getStudentByCreatedDate(createdDate);
+
+        slackClient.sendMessage("--- student data from db to slack (api). student/getStudentCreatedAfterDate ---");
+        for (Student stu : student) {
+            slackClient.sendMessage("student id:" + stu.getId());
+            slackClient.sendMessage("student name:" + stu.getName());
+            slackClient.sendMessage("student RollNumber:" + stu.getRollNumber());
+            slackClient.sendMessage("student CreatedDate:" + stu.getCreatedDate());
+            slackClient.sendMessage("student isActive:" + stu.getActive());
+            slackClient.sendMessage("student UpdatedDate:" + stu.getUpdatedDate());
+            //   slackClient.sendMessage("school id:"+ stu.getSchool());
+        }
+
+        return student;
     }
 
     // -------------- for course table ----------------------------
@@ -510,6 +554,25 @@ public class FirstController {
         slackClient.sendMessage("course isActive:" + course.getActive());
         slackClient.sendMessage("course UpdatedDate:" + course.getUpdatedDate());
         //   slackClient.sendMessage("student id:"+ stu.getStudent());
+
+        return course;
+    }
+
+    //getCourseByCreatedDate :-
+    //exp: localhost:8080/course/getCourseByCreatedDate?createdDate=1111-04-03 00:00:00.0000000
+    @RequestMapping(value = "course/getCourseByCreatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Course> course = courseService.getCourseByCreatedDate(createdDate);
+
+        slackClient.sendMessage("--- course data from db to slack (api). getAllCoursesByIsActiveFalse ---");
+        for (Course c : course) {
+            slackClient.sendMessage("course id:" + c.getId());
+            slackClient.sendMessage("course name:" + c.getName());
+            slackClient.sendMessage("course CreatedDate:" + c.getCreatedDate());
+            slackClient.sendMessage("course isActive:" + c.getActive());
+            slackClient.sendMessage("course UpdatedDate:" + c.getUpdatedDate());
+            //   slackClient.sendMessage("student id:"+ stu.getStudent());
+        }
 
         return course;
     }
@@ -661,6 +724,26 @@ public class FirstController {
         }
 
         return createdAfterDate;
+    }
+
+    //getSchoolByCreatedDate :-
+    //exp: localhost:8080/mark/getMarkByCreatedDate?createdDate=1234-05-06 00:00:00.0000000
+    @RequestMapping(value = "mark/getMarkByCreatedDate", method = RequestMethod.GET)
+    public List<Mark> getMarkByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Mark> mark = markService.getMarkByCreatedDate(createdDate);
+
+        slackClient.sendMessage("--- mark data from db to slack (api). mark/getMarkByCreatedDate ---");
+        for (Mark m : mark) {
+            slackClient.sendMessage("mark id:" + m.getId());
+            slackClient.sendMessage("grade:" + m.getGrade());
+            slackClient.sendMessage("obtainedMarks:" + m.getObtainedMarks());
+            slackClient.sendMessage("course CreatedDate:" + m.getCreatedDate());
+            slackClient.sendMessage("course isActive:" + m.getActive());
+            slackClient.sendMessage("course UpdatedDate:" + m.getUpdatedDate());
+            //   slackClient.sendMessage("course id:"+ stu.getCourse());
+        }
+
+        return mark;
     }
 
 }

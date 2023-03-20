@@ -7,6 +7,7 @@ import com.springbootpone.NajatSpringbootProjectOne.Repositories.CourseRepositor
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -146,6 +147,35 @@ public class CourseService {
         course.setUpdatedDate(convertedDateFromStringToDateFormat);
         courseRepository.save(course);
     }
+
+    //addNewCourseDependOfCourseInput
+    public void addNewCourseDependOfCourseInput (@RequestParam String courseName, @RequestParam Boolean isActive) {
+
+        Course cObj = new Course();
+        cObj.setName(courseName);
+        cObj.setActive(isActive);
+        courseRepository.save(cObj);
+    }
+
+    //getCourseByCreatedDate
+    //note: always date we will convert it to string, with parseException
+    public List<Course> getCourseByCreatedDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        List<Course> course = courseRepository.getCourseByCreatedDate(convertedDateFromStringToDateFormat);
+        return course;
+    }
+
+    //deleteCourseByCreatedDate -> put isActive false by createdDate :-
+    public void getUpdateIsActiveFalseByCreatedDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        courseRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
+    }
+
+
 
 
 

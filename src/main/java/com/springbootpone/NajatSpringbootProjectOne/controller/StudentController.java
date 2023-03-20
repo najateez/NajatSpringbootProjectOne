@@ -138,6 +138,32 @@ public class StudentController {
         studentService.setUpdateUpdatedDateByUserInput(date, id);
     }
 
+    //addNewSchoolDependOfStudentInput
+    //exp: localhost:8080/school/addNewSchoolDependOfSchoolInput?schoolName=twixxxia&isActive=true
+    //used SchoolService, schoolController.
+    //same as previous code of addSchool() but with parameter.
+    @RequestMapping(value = "student/addNewStudentDependOfStudentInput", method = RequestMethod.POST)
+    public void addNewStudentDependOfStudentInput(@RequestParam String studentName, @RequestParam String rollNumber, @RequestParam Boolean isActive) {
+
+        studentService.addNewStudentDependOfStudentInput(studentName,rollNumber,isActive);
+    }
+
+    //getStudentByCreatedDate :-
+    //exp: localhost:8080/student/getStudentByCreatedDate?createdDate=2009-05-02 00:00:00.0000000
+    //note: always date we will convert it to string, with parseException
+    @RequestMapping(value = "student/getStudentByCreatedDate", method = RequestMethod.GET)
+    public List<Student> getStudentByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Student> student = studentService.getStudentByCreatedDate(createdDate);
+        return student;
+    }
+
+    //deleteStudentByCreatedDate -> put isActive false by createdDate :-
+    //exp: localhost:8080/student/UpdateIsActiveFalseByCreatedDate?createdDate=1996-12-12 00:00:00.0000000
+    @RequestMapping(value = "student/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
+        studentService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    }
+
 
 
 

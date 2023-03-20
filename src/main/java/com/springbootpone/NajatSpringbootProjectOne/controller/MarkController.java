@@ -157,6 +157,32 @@ public class MarkController {
         return markService.getByObtainedMarksLessThan(obtainedMarks);
     }
 
+    //addNewMarkDependOfMarkInput
+    //exp: localhost:8080/Mark/addNewMarkDependOfMarkInput?isActive=false&grade=very good&obtainedMarks=94
+    //used SchoolService, schoolController.
+    //same as previous code of addSchool() but with parameter.
+    @RequestMapping(value = "Mark/addNewMarkDependOfMarkInput", method = RequestMethod.POST)
+    public void addNewMarkDependOfMarkInput(@RequestParam String grade, @RequestParam Integer obtainedMarks, @RequestParam Boolean isActive) {
+
+        markService.addNewMarkDependOfMarkInput(grade,obtainedMarks,isActive);
+    }
+
+    //getSchoolByCreatedDate :-
+    //exp: localhost:8080/mark/getMarkByCreatedDate?createdDate=1234-05-06 00:00:00.0000000
+    //note: always date we will convert it to string, with parseException
+    @RequestMapping(value = "mark/getMarkByCreatedDate", method = RequestMethod.GET)
+    public List<Mark> getMarkByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Mark> mark = markService.getMarkByCreatedDate(createdDate);
+        return mark;
+    }
+
+    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    //exp: localhost:8080/mark/UpdateIsActiveFalseByCreatedDate?createdDate=1111-06-08 00:00:00.0000000
+    @RequestMapping(value = "mark/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
+        markService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    }
+
 
 
 

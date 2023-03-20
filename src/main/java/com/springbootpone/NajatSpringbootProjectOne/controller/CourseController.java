@@ -141,5 +141,30 @@ public class CourseController {
         courseService.setUpdateUpdatedDateByUserInput(date, id);
     }
 
+    //addNewCourseDependOfCourseInput
+    //exp: localhost:8080/course/addNewCourseDependOfCourseInput?courseName=php&isActive=true
+    //used SchoolService, schoolController.
+    //same as previous code of addSchool() but with parameter.
+    @RequestMapping(value = "course/addNewCourseDependOfCourseInput", method = RequestMethod.POST)
+    public void addNewCourseDependOfCourseInput(@RequestParam String courseName, @RequestParam Boolean isActive) {
+
+        courseService.addNewCourseDependOfCourseInput(courseName,isActive);
+    }
+
+    //getCourseByCreatedDate :-
+    //exp: localhost:8080/course/getCourseByCreatedDate?createdDate=1111-04-03 00:00:00.0000000
+    //note: always date we will convert it to string, with parseException
+    @RequestMapping(value = "course/getCourseByCreatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Course> course = courseService.getCourseByCreatedDate(createdDate);
+        return course;
+    }
+
+    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    @RequestMapping(value = "course/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
+        courseService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    }
+
 
 }

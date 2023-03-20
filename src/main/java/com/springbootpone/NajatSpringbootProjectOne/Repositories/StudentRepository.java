@@ -93,6 +93,18 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
  @Query(value = "UPDATE Student s SET s.isActive = true WHERE s.id =:studentId")
  void getUpdateIsActiveTrueByStudentId(@Param("studentId") Integer id);
 
+ //getStudentByCreatedDate
+ @Query(value = "SELECT s from Student s where s.createdDate =:createdDate")
+ List<Student> getStudentByCreatedDate(@Param("createdDate") Date createdDate);
+
+
+ //deleteStudentByCreatedDate -> put isActive false by createdDate :-
+ //Note: if you use @Modifying notation, use all void in(Repository,Service,Controller). ALWAYS.
+ @Modifying
+ @Transactional
+ @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.createdDate =:createdDate")
+ void getUpdateIsActiveFalseByCreatedDate(@Param("createdDate") Date createdDate);
+
 
 
 

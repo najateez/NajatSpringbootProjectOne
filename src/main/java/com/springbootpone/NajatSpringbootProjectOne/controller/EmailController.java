@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// To send email and attechment to slack in channel, should EmailController Works.
 //@RestController
 @RequestMapping(value = "email")
 public class EmailController {
@@ -38,6 +39,17 @@ public class EmailController {
         String status = emailService.sendMailWithAttachment(details);
         return status;
     }
+
+    /*
+    Make sure there is password in application.properties
+    exp: localhost:8080/email/sendMailWithAttachment
+    write in postman:
+    {
+    "recipient":["najateez96@gmail.com"],
+    "subject": "sub fdjsfjksdl",
+    "msgBody":"bodymessage jkgfhgkfd" ,
+    "attachment":"C:/Users/Acer/intellijIdea-workspace/NajatSpringbootProjectOne/School_ListOfApis_Batch1.pdf"
+     */
 
 
 

@@ -101,6 +101,19 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query("SELECT s from Mark s where s.obtainedMarks < :obtainedMarks")
     List<Mark> getByObtainedMarksLessThan(Integer obtainedMarks);
 
+    //getMarkByCreatedDate
+    @Query(value = "SELECT s from Mark s where s.createdDate =:createdDate")
+    List<Mark> getMarkByCreatedDate(@Param("createdDate") Date createdDate);
+
+    //deleteMarkByCreatedDate -> put isActive false by createdDate :-
+    //Note: if you use @Modifying notation, use all void in(Repository,Service,Controller). ALWAYS.
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Mark s SET s.isActive = false WHERE s.createdDate =:createdDate")
+    void getUpdateIsActiveFalseByCreatedDate(@Param("createdDate") Date createdDate);
+
+
+
 
 
 
