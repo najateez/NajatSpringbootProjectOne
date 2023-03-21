@@ -3,6 +3,7 @@ package com.springbootpone.NajatSpringbootProjectOne;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // in pom.xml page to connect jar dependency to your project library, write in google: oracle maven dependency
 //https://mvnrepository.com/artifact/com.oracle/ojdbc14
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
     - repo.findById(id which is in school model property) -> get user from db
     */
 @SpringBootApplication
+@EnableScheduling //-> for CRON
 public class NajatSpringbootProjectOneeApplication {
 
 	public static void main(String[] args) {
