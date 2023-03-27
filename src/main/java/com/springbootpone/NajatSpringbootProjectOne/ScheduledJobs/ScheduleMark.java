@@ -6,6 +6,9 @@ import com.springbootpone.NajatSpringbootProjectOne.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.util.List;
@@ -183,6 +186,24 @@ public class ScheduleMark {
             //   slackClient.sendMessage("course id:"+ stu.getCourse());
         }
 
+        return mark;
+    }
+
+    //getMarkByUpdatedDate
+    // @Scheduled(cron = "*/5 * * * * *")
+    @RequestMapping(value = "mark/getMarkByUpdatedDate", method = RequestMethod.GET)
+    public List<Mark> getMarkByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Mark> mark = markService.getMarkByUpdatedDate(updatedDate);
+
+        for (Mark m : mark) {
+            slackClient.sendMessage("mark id:" + m.getId());
+            slackClient.sendMessage("grade:" + m.getGrade());
+            slackClient.sendMessage("obtainedMarks:" + m.getObtainedMarks());
+            slackClient.sendMessage("course CreatedDate:" + m.getCreatedDate());
+            slackClient.sendMessage("course isActive:" + m.getActive());
+            slackClient.sendMessage("course UpdatedDate:" + m.getUpdatedDate());
+            //   slackClient.sendMessage("course id:"+ stu.getCourse());
+        }
         return mark;
     }
 }

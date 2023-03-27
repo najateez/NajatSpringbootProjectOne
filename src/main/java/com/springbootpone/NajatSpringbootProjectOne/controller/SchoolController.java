@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-@RestController
+//@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes

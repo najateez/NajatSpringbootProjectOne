@@ -267,6 +267,24 @@ public class FirstController {
         return school;
     }
 
+    //getSchoolByUpdatedDate
+    //exp: localhost:8080/school/getSchoolByUpdatedDate?updatedDate=2023-03-19 00:00:00.0000000
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "school/getSchoolByUpdatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<School> school = schoolService.getSchoolByUpdatedDate(updatedDate);
+
+        slackClient.sendMessage("--- school data from db to slack (api). school/getSchoolByUpdatedDate ---");
+        for (School s : school) {
+            slackClient.sendMessage("school id:" + s.getId());
+            slackClient.sendMessage("school name:" + s.getName());
+            slackClient.sendMessage("school CreatedDate:" + s.getCreatedDate());
+            slackClient.sendMessage("school isActive:" + s.getActive());
+            slackClient.sendMessage("school UpdatedDate:" + s.getUpdatedDate());
+        }
+        return school;
+    }
+
     // -------------- for student table ----------------------------
 
     //getAllToSlack
@@ -436,6 +454,25 @@ public class FirstController {
         return student;
     }
 
+    //getStudentByUpdatedDate
+    //exp: localhost:8080/student/getStudentByUpdatedDate?updatedDate=2023-03-19 00:00:00.0000000
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "student/getStudentByUpdatedDate", method = RequestMethod.GET)
+    public List<Student> getStudentByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Student> student = studentService.getStudentByUpdatedDate(updatedDate);
+
+        for (Student stu : student) {
+            slackClient.sendMessage("student id:" + stu.getId());
+            slackClient.sendMessage("student name:" + stu.getName());
+            slackClient.sendMessage("student RollNumber:" + stu.getRollNumber());
+            slackClient.sendMessage("student CreatedDate:" + stu.getCreatedDate());
+            slackClient.sendMessage("student isActive:" + stu.getActive());
+            slackClient.sendMessage("student UpdatedDate:" + stu.getUpdatedDate());
+            //   slackClient.sendMessage("school id:"+ stu.getSchool());
+        }
+        return student;
+    }
+
     // -------------- for course table ----------------------------
 
     //getAllToSlack
@@ -574,6 +611,24 @@ public class FirstController {
             //   slackClient.sendMessage("student id:"+ stu.getStudent());
         }
 
+        return course;
+    }
+
+    //getCourseByUpdatedDate
+    //exp: localhost:8080/course/getCourseByUpdatedDate?updatedDate=2023-03-13 00:00:00.0000000
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "course/getCourseByUpdatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Course> course = courseService.getCourseByUpdatedDate(updatedDate);
+
+        for (Course c : course) {
+            slackClient.sendMessage("course id:" + c.getId());
+            slackClient.sendMessage("course name:" + c.getName());
+            slackClient.sendMessage("course CreatedDate:" + c.getCreatedDate());
+            slackClient.sendMessage("course isActive:" + c.getActive());
+            slackClient.sendMessage("course UpdatedDate:" + c.getUpdatedDate());
+            //   slackClient.sendMessage("student id:"+ stu.getStudent());
+        }
         return course;
     }
 
@@ -743,6 +798,25 @@ public class FirstController {
             //   slackClient.sendMessage("course id:"+ stu.getCourse());
         }
 
+        return mark;
+    }
+
+    //getMarkByUpdatedDate
+    //exp: localhost:8080/mark/getMarkByUpdatedDate?updatedDate=2023-03-13 00:00:00.0000000
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "mark/getMarkByUpdatedDate", method = RequestMethod.GET)
+    public List<Mark> getMarkByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Mark> mark = markService.getMarkByUpdatedDate(updatedDate);
+
+        for (Mark m : mark) {
+            slackClient.sendMessage("mark id:" + m.getId());
+            slackClient.sendMessage("grade:" + m.getGrade());
+            slackClient.sendMessage("obtainedMarks:" + m.getObtainedMarks());
+            slackClient.sendMessage("course CreatedDate:" + m.getCreatedDate());
+            slackClient.sendMessage("course isActive:" + m.getActive());
+            slackClient.sendMessage("course UpdatedDate:" + m.getUpdatedDate());
+            //   slackClient.sendMessage("course id:"+ stu.getCourse());
+        }
         return mark;
     }
 

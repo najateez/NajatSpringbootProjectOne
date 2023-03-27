@@ -6,6 +6,9 @@ import com.springbootpone.NajatSpringbootProjectOne.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.util.List;
@@ -33,6 +36,8 @@ public class ScheduleSchool {
     /* Same code as firstController, but should remove all @RequestParam from code, and full of @RequestMapping
      because it is not controller. Also remove full of @Scheduled to the function which has parameter.
      */
+
+    // No need for postman here, because not controller
     @Scheduled(cron = "* */5 * * * *")
     public List<School> getAllSchools() {
         List<School> schools = schoolService.getAllSchools();
@@ -190,6 +195,22 @@ public class ScheduleSchool {
             slackClient.sendMessage("school UpdatedDate:" + s.getUpdatedDate());
         }
 
+        return school;
+    }
+
+    //getSchoolByUpdatedDate
+    //   @Scheduled(cron = "* */15 * * * *")
+    public List<School> getSchoolByUpdatedDate(String updatedDate) throws ParseException {
+        List<School> school = schoolService.getSchoolByUpdatedDate(updatedDate);
+
+        slackClient.sendMessage("--- school data from db to slack (api). school/getSchoolByUpdatedDate ---");
+        for (School s : school) {
+            slackClient.sendMessage("school id:" + s.getId());
+            slackClient.sendMessage("school name:" + s.getName());
+            slackClient.sendMessage("school CreatedDate:" + s.getCreatedDate());
+            slackClient.sendMessage("school isActive:" + s.getActive());
+            slackClient.sendMessage("school UpdatedDate:" + s.getUpdatedDate());
+        }
         return school;
     }
 
