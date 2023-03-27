@@ -13,7 +13,7 @@ import java.util.List;
 // ------ Its All about CRON.. sending values from db table to slack (and choose after how many days or,.... will send these data's again to slack. as a (Remainder) ----
 // CRON for course
 
-//@Component
+@Component
 public class ScheduleCourse {
 
     @Autowired
