@@ -97,5 +97,22 @@ public interface CourseRepository extends CrudRepository<Course,Integer>{
     @Query(value = "UPDATE Course s SET s.isActive = false WHERE s.createdDate =:createdDate")
     void getUpdateIsActiveFalseByCreatedDate(@Param("createdDate") Date createdDate);
 
+    //getCourseByUpdatedDate
+    @Query(value = "SELECT s from Course s where s.updatedDate =:updatedDate")
+    List<Course> getCourseByUpdatedDate(@Param("updatedDate") Date updatedDate);
+
+    //deleteCoursesByUpdatedDate -> put isActive false by UpdatedDate :-
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Course s SET s.isActive = false WHERE s.updatedDate =:updatedDate")
+    void getUpdateIsActiveFalseByUpdatedDate(@Param("updatedDate") Date updatedDate);
+//********
+
+    //deleteAllCoursesCreatedAfterDate -> put isActive false for AllCoursesCreatedAfterDate
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Course s SET s.isActive = false WHERE s.createdDate >:createdDate")
+    void getDeleteAllCoursesCreatedAfterDate(@Param("createdDate") Date createdDate);
+
 
 }

@@ -183,16 +183,16 @@ public class SchoolService {
     }
 
 
-
+//*********
     //getSchoolByUpdatedDate
-/*    public List<School> getSchoolByUpdatedDate(String updatedDate) throws ParseException {
+    public List<School> getSchoolByUpdatedDate(String updatedDate) throws ParseException {
 
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
         List<School> school = schoolRepository.getSchoolByUpdatedDate(convertedDateFromStringToDateFormat);
         return school;
-    } */
-
+    }
+//*********
 
 
     //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
@@ -203,13 +203,24 @@ public class SchoolService {
             schoolRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
     }
 
+    //*********
     //deleteSchoolsByUpdatedDate -> put isActive false by UpdatedDate :-
-  /*  public void getUpdateIsActiveFalseByUpdatedDate(String updatedDate) throws ParseException {
+    public void getUpdateIsActiveFalseByUpdatedDate(String updatedDate) throws ParseException {
 
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
            schoolRepository.getUpdateIsActiveFalseByUpdatedDate(convertedDateFromStringToDateFormat);
-    }  */
+    }
+    //*********
+
+    //deleteAllSchoolsCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+    public void getDeleteAllSchoolsCreatedAfterDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+           schoolRepository.getDeleteAllSchoolsCreatedAfterDate(convertedDateFromStringToDateFormat);
+
+    }
 
 
 

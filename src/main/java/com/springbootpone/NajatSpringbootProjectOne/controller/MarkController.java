@@ -167,7 +167,7 @@ public class MarkController {
         markService.addNewMarkDependOfMarkInput(grade,obtainedMarks,isActive);
     }
 
-    //getSchoolByCreatedDate :-
+    //getMarkByCreatedDate :-
     //exp: localhost:8080/mark/getMarkByCreatedDate?createdDate=1234-05-06 00:00:00.0000000
     //note: always date we will convert it to string, with parseException
     @RequestMapping(value = "mark/getMarkByCreatedDate", method = RequestMethod.GET)
@@ -176,11 +176,38 @@ public class MarkController {
         return mark;
     }
 
-    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    //deleteMarkByCreatedDate -> put isActive false by createdDate :-
     //exp: localhost:8080/mark/UpdateIsActiveFalseByCreatedDate?createdDate=1111-06-08 00:00:00.0000000
     @RequestMapping(value = "mark/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
     public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
         markService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    }
+
+    //getMarkByUpdatedDate
+    //exp: localhost:8080/mark/getSchoolByUpdatedDate?updatedDate=2023-03-19
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "mark/getMarkByUpdatedDate", method = RequestMethod.GET)
+    public List<Mark> getMarkByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Mark> mark = markService.getMarkByUpdatedDate(updatedDate);
+        return mark;
+    }
+
+    //deleteMarkByUpdatedDate -> put isActive false by UpdatedDate :-
+    //exp: localhost:8080/mark/UpdateIsActiveFalseByUpdatedDate?updatedDate=2023-03-13 00:00:00.0000000
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "mark/UpdateIsActiveFalseByUpdatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        markService.getUpdateIsActiveFalseByUpdatedDate(updatedDate);
+    }
+    //*********
+
+    //deleteAllSchoolsCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+    //exp: localhost:8080/school/deleteAllMarksCreatedAfterDate?createdDate=1234-05-06 00:00:00.0000000
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "mark/deleteAllMarksCreatedAfterDate", method = RequestMethod.POST)
+    public void getDeleteAllMarksCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
+        markService.getDeleteAllMarksCreatedAfterDate(createdDate);
+
     }
 
 

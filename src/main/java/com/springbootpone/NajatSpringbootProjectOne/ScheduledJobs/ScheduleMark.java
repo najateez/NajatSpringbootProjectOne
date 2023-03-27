@@ -13,7 +13,7 @@ import java.util.List;
 // ------ Its All about CRON.. sending values from db table to slack (and choose after how many days or,.... will send these data's again to slack. as a (Remainder) ----
 // CRON for mark
 
-@Component
+//@Component
 public class ScheduleMark {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ScheduleMark {
     // -------------- for mark table ----------------------------
 
     //getAllToSlack :-
-    @Scheduled(cron = "* */16 * * * *")
+    @Scheduled(cron = "* * */5 * * *")
     public List<Mark> getAllMarks() {
         List<Mark> theMark = markService.getAllMarks();
 
@@ -78,7 +78,7 @@ public class ScheduleMark {
     }
 
     // getAllActiveMarksToSlack :-
-    @Scheduled(cron = "* */17 * * * *")
+    @Scheduled(cron = "* * */6 * * *")
     public List<Mark> getAllActiveMarks() {
         List<Mark> activeMarksList = markService.getAllActiveMarks();
 
@@ -96,7 +96,7 @@ public class ScheduleMark {
     }
 
     //getAllMarksByIsActiveFalseToSlack :-
-    @Scheduled(cron = "* */18 * * * *")
+    @Scheduled(cron = "* * */7 * * *")
     public List<Mark> getAllInActiveMarks() {
         List<Mark> notInActiveMarksList = markService.getAllInActiveMarks();
 
@@ -114,7 +114,7 @@ public class ScheduleMark {
     }
 
     //getLatestRowToSlack :-
-    @Scheduled(cron = "* */19 * * * *")
+    @Scheduled(cron = "* * */8 * * *")
     public Mark getLatestRowMark() {
         Mark mark = markService.getLatestRowMark();
 
@@ -131,7 +131,7 @@ public class ScheduleMark {
     }
 
     //getLatestUpdatedToSlack :-
-    @Scheduled(cron = "* */20 * * * *")
+    @Scheduled(cron = "* * */9 * * *")
     public Mark getLatestUpdatedMark() {
         Mark mark = markService.getLatestUpdatedMark();
 

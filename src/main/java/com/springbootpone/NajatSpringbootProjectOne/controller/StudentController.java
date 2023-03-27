@@ -164,6 +164,32 @@ public class StudentController {
         studentService.getUpdateIsActiveFalseByCreatedDate(createdDate);
     }
 
+    //getStudentByUpdatedDate
+    //exp: localhost:8080/student/getStudentByUpdatedDate?updatedDate=2023-03-13
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "student/getStudentByUpdatedDate", method = RequestMethod.GET)
+    public List<Student> getStudentByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Student> student = studentService.getStudentByUpdatedDate(updatedDate);
+        return student;
+    }
+
+    //deleteStudentsByUpdatedDate -> put isActive false by UpdatedDate :-
+    //exp: localhost:8080/student/UpdateIsActiveFalseByUpdatedDate?updatedDate=2023-03-19 00:00:00.0000000
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "student/UpdateIsActiveFalseByUpdatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        studentService.getUpdateIsActiveFalseByUpdatedDate(updatedDate);
+    }
+
+    //deleteAllStudentsCreatedAfterDate -> put isActive false for AllStudentsCreatedAfterDate
+    //exp: localhost:8080/school/deleteAllSchoolsCreatedAfterDate?createdDate=1111-12-12
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "student/deleteAllStudentsCreatedAfterDate", method = RequestMethod.POST)
+    public void getDeleteAllStudentsCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
+        studentService.getDeleteAllStudentsCreatedAfterDate(createdDate);
+
+    }
+
 
 
 

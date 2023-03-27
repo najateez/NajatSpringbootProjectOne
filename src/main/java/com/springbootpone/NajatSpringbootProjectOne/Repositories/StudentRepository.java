@@ -105,6 +105,23 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
  @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.createdDate =:createdDate")
  void getUpdateIsActiveFalseByCreatedDate(@Param("createdDate") Date createdDate);
 
+ //getStudentByUpdatedDate
+ @Query(value = "SELECT s from Student s where s.updatedDate =:updatedDate")
+ List<Student> getStudentByUpdatedDate(@Param("updatedDate") Date updatedDate);
+
+ //deleteStudentByUpdatedDate -> put isActive false by UpdatedDate :-
+ @Modifying
+ @Transactional
+ @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.updatedDate =:updatedDate")
+ void getUpdateIsActiveFalseByUpdatedDate(@Param("updatedDate") Date updatedDate);
+//********
+
+ //deleteAllStudentCreatedAfterDate -> put isActive false for AllStudentsCreatedAfterDate
+ @Modifying
+ @Transactional
+ @Query(value = "UPDATE Student s SET s.isActive = false WHERE s.createdDate >:createdDate")
+ void getDeleteAllStudentsCreatedAfterDate(@Param("createdDate") Date createdDate);
+
 
 
 

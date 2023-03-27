@@ -13,7 +13,7 @@ import java.util.List;
 // ------ Its All about CRON.. sending values from db table to slack (and choose after how many days or,.... will send these data's again to slack. as a (Remainder) ----
 // CRON for course
 
-@Component
+//@Component
 public class ScheduleCourse {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ScheduleCourse {
     // -------------- for course table ----------------------------
 
     //getAllToSlack
-    @Scheduled(cron = "* */11 * * * *")
+    @Scheduled(cron = "* */55 * * * *")
     public List<Course> getAllCourses() {
         List<Course> theCourse = courseService.getAllCourses();
 
@@ -75,7 +75,7 @@ public class ScheduleCourse {
     }
 
     // getAllActiveCoursesToSlack :-
-    @Scheduled(cron = "* */12 * * * *")
+    @Scheduled(cron = "* * */1 * * *")
     public List<Course> getAllActiveCourses() {
         List<Course> activeCoursesList = courseService.getAllActiveCourses();
 
@@ -92,7 +92,7 @@ public class ScheduleCourse {
     }
 
     // getAllNotActiveCoursesToSlack :-
-    @Scheduled(cron = "* */13 * * * *")
+    @Scheduled(cron = "* * */2 * * *")
     public List<Course> getAllInActiveCourses() {
         List<Course> notActiveCoursesList = courseService.getAllInActiveCourses();
 
@@ -109,7 +109,7 @@ public class ScheduleCourse {
     }
 
     //getLatestRowToSlack :-
-    @Scheduled(cron = "* */14 * * * *")
+    @Scheduled(cron = "* * */3 * * *")
     public Course getLatestRowCourse() {
         Course course = courseService.getLatestRowCourse();
 
@@ -124,7 +124,7 @@ public class ScheduleCourse {
     }
 
     //getLatestUpdatedToSlack :-
-    @Scheduled(cron = "* */15 * * * *")
+    @Scheduled(cron = "* * */4 * * *")
     public Course getLatestUpdatedCourse() {
         Course course = courseService.getLatestUpdatedCourse();
 

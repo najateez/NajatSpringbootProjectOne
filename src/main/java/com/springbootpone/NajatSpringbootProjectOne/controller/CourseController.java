@@ -160,10 +160,36 @@ public class CourseController {
         return course;
     }
 
-    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
+    //deleteCoursesByCreatedDate -> put isActive false by createdDate :-
     @RequestMapping(value = "course/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
     public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
         courseService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    }
+
+    //getCourseByUpdatedDate
+    //exp: localhost:8080/course/getCourseByUpdatedDate?updatedDate=2023-03-13 00:00:00.0000000
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "course/getCourseByUpdatedDate", method = RequestMethod.GET)
+    public List<Course> getCourseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<Course> course = courseService.getCourseByUpdatedDate(updatedDate);
+        return course;
+    }
+
+    //deleteCoursesByUpdatedDate -> put isActive false by UpdatedDate :-
+    //exp: localhost:8080/course/UpdateIsActiveFalseByUpdatedDate?updatedDate=2023-03-19 00:00:00.0000000
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "course/UpdateIsActiveFalseByUpdatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        courseService.getUpdateIsActiveFalseByUpdatedDate(updatedDate);
+    }
+
+    //deleteAllCoursesCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+    //exp: localhost:8080/course/deleteAllCoursesCreatedAfterDate?createdDate=1111-04-03 00:00:00.0000000
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "course/deleteAllCoursesCreatedAfterDate", method = RequestMethod.POST)
+    public void getDeleteAllCoursesCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
+        courseService.getDeleteAllCoursesCreatedAfterDate(createdDate);
+
     }
 
 

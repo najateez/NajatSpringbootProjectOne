@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-//@RestController
+@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -133,7 +133,7 @@ public class SchoolController {
     //exp: localhost:8080/school/updateSchool?schoolName=shambaqbaq&schoolId=59
     @RequestMapping(value = "school/updateSchool", method = RequestMethod.POST)
     public void getUpdateSchoolById(@RequestParam Integer schoolId, @RequestParam String schoolName) {
-        schoolService.getUpdateSchoolById(schoolId,schoolName);
+        schoolService.getUpdateSchoolById(schoolId, schoolName);
     }
 
     //getLatestRow :-
@@ -147,7 +147,7 @@ public class SchoolController {
 
     //getLatestUpdated
     //exp: localhost:8080/school/getLatestUpdatedSchool
-  @RequestMapping(value = "school/getLatestUpdatedSchool", method = RequestMethod.GET)
+    @RequestMapping(value = "school/getLatestUpdatedSchool", method = RequestMethod.GET)
     public School getLatestUpdatedSchool() {
         School school = schoolService.getLatestUpdatedSchool();
         return school;
@@ -174,7 +174,7 @@ public class SchoolController {
     @RequestMapping(value = "school/getSchoolByNumberOfStudent", method = RequestMethod.POST)
     public List<School> getSchoolByNumberOfStudent(@RequestParam Integer numberOfStudent) {
 
-        List<School> schoolList=schoolService.getSchoolByNumberOfStudent(numberOfStudent);
+        List<School> schoolList = schoolService.getSchoolByNumberOfStudent(numberOfStudent);
         return schoolList;
     }
 
@@ -188,7 +188,7 @@ public class SchoolController {
     // for GET use @RequestParam. but for POST use @RequestBody .
     //exp: localhost:8080/updateUpdatedDateByUserInput?date=2222-10-11&id=2
     //POST
-        @RequestMapping(value = "school/updateUpdatedDateByUserInput")
+    @RequestMapping(value = "school/updateUpdatedDateByUserInput")
     public void setUpdateUpdatedDateByUserInput(@RequestParam String date, @RequestParam Integer id) throws ParseException {
 
         schoolService.setUpdateUpdatedDateByUserInput(date, id);
@@ -201,39 +201,50 @@ public class SchoolController {
     @RequestMapping(value = "school/addNewSchoolDependOfSchoolInput", method = RequestMethod.POST)
     public void addNewSchoolDependOfSchoolInput(@RequestParam String schoolName, @RequestParam Boolean isActive) {
 
-        schoolService.addNewSchoolDependOfSchoolInput(schoolName,isActive);
+        schoolService.addNewSchoolDependOfSchoolInput(schoolName, isActive);
     }
 
     //getSchoolByCreatedDate :-
     //exp: localhost:8080/school/getSchoolByCreatedDate?createdDate=7575-12-11 00:00:00.0000000
     //note: always date we will convert it to string, with parseException
-   @RequestMapping(value = "school/getSchoolByCreatedDate", method = RequestMethod.GET)
+    @RequestMapping(value = "school/getSchoolByCreatedDate", method = RequestMethod.GET)
     public List<School> getSchoolByCreatedDate(@RequestParam String createdDate) throws ParseException {
-       List<School> school = schoolService.getSchoolByCreatedDate(createdDate);
+        List<School> school = schoolService.getSchoolByCreatedDate(createdDate);
         return school;
     }
-
-
-    //getSchoolByUpdatedDate
- /*   @RequestMapping(value = "school/getSchoolByUpdatedDate", method = RequestMethod.GET)
-    public List<School> getSchoolByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
-        List<School> school = schoolService.getSchoolByUpdatedDate(updatedDate);
-        return school;
-    } */
-
 
     //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
     //exp: localhost:8080/school/UpdateIsActiveFalseByCreatedDate?createdDate=7575-12-11 00:00:00.0000000
     @RequestMapping(value = "school/UpdateIsActiveFalseByCreatedDate", method = RequestMethod.POST)
-    public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException{
-         schoolService.getUpdateIsActiveFalseByCreatedDate(createdDate);
+    public void getUpdateIsActiveFalseByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        schoolService.getUpdateIsActiveFalseByCreatedDate(createdDate);
     }
 
-    //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
- /*   @RequestMapping(value = "school/UpdateIsActiveFalseByUpdatedDate", method = RequestMethod.POST)
-    public void getUpdateIsActiveFalseByUpdatedDate(@RequestParam String updatedDate) throws ParseException{
+    //getSchoolByUpdatedDate
+    //exp: localhost:8080/school/getSchoolByUpdatedDate?updatedDate=2023-03-19
+    //to work this code should time be in db all zero's.
+    @RequestMapping(value = "school/getSchoolByUpdatedDate", method = RequestMethod.GET)
+    public List<School> getSchoolByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
+        List<School> school = schoolService.getSchoolByUpdatedDate(updatedDate);
+        return school;
+    }
+
+    //deleteSchoolsByUpdatedDate -> put isActive false by UpdatedDate :-
+    //exp: localhost:8080/school/UpdateIsActiveFalseByUpdatedDate?updatedDate=2023-03-13 00:00:00.0000000
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "school/UpdateIsActiveFalseByUpdatedDate", method = RequestMethod.POST)
+    public void getUpdateIsActiveFalseByUpdatedDate(@RequestParam String updatedDate) throws ParseException {
         schoolService.getUpdateIsActiveFalseByUpdatedDate(updatedDate);
-    } */
+    }
+
+    //deleteAllSchoolsCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+    //exp: localhost:8080/school/deleteAllSchoolsCreatedAfterDate?createdDate=1111-12-12
+    // to work this one should time be in db all zero's.
+    @RequestMapping(value = "school/deleteAllSchoolsCreatedAfterDate", method = RequestMethod.POST)
+    public void getDeleteAllSchoolsCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
+        schoolService.getDeleteAllSchoolsCreatedAfterDate(createdDate);
+
+    }
 
 
 

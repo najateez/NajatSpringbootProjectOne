@@ -190,6 +190,33 @@ public class MarkService {
         markRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
     }
 
+    //getSchoolByUpdatedDate
+    public List<Mark> getMarkByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        List<Mark> mark = markRepository.getMarkByUpdatedDate(convertedDateFromStringToDateFormat);
+        return mark;
+    }
+
+    //deleteSchoolsByUpdatedDate -> put isActive false by UpdatedDate :-
+    public void getUpdateIsActiveFalseByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        markRepository.getUpdateIsActiveFalseByUpdatedDate(convertedDateFromStringToDateFormat);
+    }
+    //*********
+
+    //deleteAllMarksCreatedAfterDate -> put isActive false for AllMarksCreatedAfterDate
+    public void getDeleteAllMarksCreatedAfterDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        markRepository.getDeleteAllMarksCreatedAfterDate(convertedDateFromStringToDateFormat);
+
+    }
+
 
 
 

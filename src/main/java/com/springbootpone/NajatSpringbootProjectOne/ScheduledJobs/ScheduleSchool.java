@@ -14,7 +14,7 @@ import java.util.List;
 // ------ Its All about CRON.. sending values from db table to slack (and choose after how many days or,.... will send these data's again to slack. as a (Remainder) ----
 // CRON for school
 
-@Component
+//@Component
 public class ScheduleSchool {
 
     @Autowired
@@ -33,7 +33,7 @@ public class ScheduleSchool {
     /* Same code as firstController, but should remove all @RequestParam from code, and full of @RequestMapping
      because it is not controller. Also remove full of @Scheduled to the function which has parameter.
      */
-    @Scheduled(cron = "* */1 * * * *")
+    @Scheduled(cron = "* */5 * * * *")
     public List<School> getAllSchools() {
         List<School> schools = schoolService.getAllSchools();
 
@@ -80,7 +80,7 @@ public class ScheduleSchool {
     }
 
     // getAllActiveSchoolsToSlack :-
-    @Scheduled(cron = "* */2 * * * *")
+    @Scheduled(cron = "* */10 * * * *")
     public List<School> getAllActiveSchools() {
         List<School> activeSchoolsList = schoolService.getAllActiveSchools();
 
@@ -97,7 +97,7 @@ public class ScheduleSchool {
     }
 
     // getAllNotActiveSchools :-
-    @Scheduled(cron = "* */3 * * * *")
+    @Scheduled(cron = "* */15 * * * *")
     public List<School> getAllInActiveSchools() {
         List<School> notActiveSchoolsList = schoolService.getAllInActiveSchools();
 
@@ -114,7 +114,7 @@ public class ScheduleSchool {
     }
 
     //getLatestRowToSlack :-
-    @Scheduled(cron = "* */4 * * * *")
+    @Scheduled(cron = "* */20 * * * *")
     public School getLatestRowSchool() {
         School school = schoolService.getLatestRowSchool();
 
@@ -129,7 +129,7 @@ public class ScheduleSchool {
     }
 
     //getLatestUpdatedToSlack :-
-    @Scheduled(cron = "* */5 * * * *")
+    @Scheduled(cron = "* */25 * * * *")
     public School getLatestUpdatedSchool() {
         School school = schoolService.getLatestUpdatedSchool();
 

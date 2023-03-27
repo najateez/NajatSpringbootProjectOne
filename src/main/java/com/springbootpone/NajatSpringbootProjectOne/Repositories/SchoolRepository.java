@@ -97,11 +97,11 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
    List<School> getSchoolByCreatedDate(@Param("createdDate") Date createdDate);
 
 
-
+    //*********
     //getSchoolByUpdatedDate
- /*  @Query(value = "SELECT s from School s where s.updatedDate =:updatedDate")
-    List<School> getSchoolByUpdatedDate(@Param("updatedDate") Date updatedDate); */
-
+   @Query(value = "SELECT s from School s where s.updatedDate =:updatedDate")
+    List<School> getSchoolByUpdatedDate(@Param("updatedDate") Date updatedDate);
+//*********
 
 
     //deleteSchoolsByCreatedDate -> put isActive false by createdDate :-
@@ -111,13 +111,20 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
     @Query(value = "UPDATE School s SET s.isActive = false WHERE s.createdDate =:createdDate")
     void getUpdateIsActiveFalseByCreatedDate(@Param("createdDate") Date createdDate);
 
+    //*********
     //deleteSchoolsByUpdatedDate -> put isActive false by UpdatedDate :-
-/*    @Modifying
+    @Modifying
     @Transactional
     @Query(value = "UPDATE School s SET s.isActive = false WHERE s.updatedDate =:updatedDate")
-    void getUpdateIsActiveFalseByUpdatedDate(@Param("updatedDate") Date updatedDate); */
+    void getUpdateIsActiveFalseByUpdatedDate(@Param("updatedDate") Date updatedDate);
+//********
 
     //deleteAllSchoolsCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE School s SET s.isActive = false WHERE s.createdDate >:createdDate")
+    void getDeleteAllSchoolsCreatedAfterDate(@Param("createdDate") Date createdDate);
+
 
 
 

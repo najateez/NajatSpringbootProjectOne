@@ -175,6 +175,33 @@ public class CourseService {
         courseRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
     }
 
+    //getSchoolByUpdatedDate
+    public List<Course> getCourseByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        List<Course> course = courseRepository.getCourseByUpdatedDate(convertedDateFromStringToDateFormat);
+        return course;
+    }
+
+    //deleteCoursesByUpdatedDate -> put isActive false by UpdatedDate :-
+    public void getUpdateIsActiveFalseByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        courseRepository.getUpdateIsActiveFalseByUpdatedDate(convertedDateFromStringToDateFormat);
+    }
+    //*********
+
+    //deleteAllCoursesCreatedAfterDate -> put isActive false for AllSchoolsCreatedAfterDate
+    public void getDeleteAllCoursesCreatedAfterDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        courseRepository.getDeleteAllCoursesCreatedAfterDate(convertedDateFromStringToDateFormat);
+
+    }
+
 
 
 

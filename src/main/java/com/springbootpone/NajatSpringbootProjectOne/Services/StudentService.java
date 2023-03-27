@@ -180,6 +180,33 @@ public class StudentService {
         studentRepository.getUpdateIsActiveFalseByCreatedDate(convertedDateFromStringToDateFormat);
     }
 
+    //getSchoolByUpdatedDate
+    public List<Student> getStudentByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        List<Student> student = studentRepository.getStudentByUpdatedDate(convertedDateFromStringToDateFormat);
+        return student;
+    }
+
+    //deleteStudentByUpdatedDate -> put isActive false by UpdatedDate :-
+    public void getUpdateIsActiveFalseByUpdatedDate(String updatedDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(updatedDate);
+        studentRepository.getUpdateIsActiveFalseByUpdatedDate(convertedDateFromStringToDateFormat);
+    }
+    //*********
+
+    //deleteAllStudentsCreatedAfterDate -> put isActive false for AllStudentsCreatedAfterDate
+    public void getDeleteAllStudentsCreatedAfterDate(String createdDate) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(createdDate);
+        studentRepository.getDeleteAllStudentsCreatedAfterDate(convertedDateFromStringToDateFormat);
+
+    }
+
 
 
 
