@@ -1,10 +1,16 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
+import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
+import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import com.springbootpone.NajatSpringbootProjectOne.Repositories.CourseRepository;
+import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,16 +20,23 @@ class MarkControllerTest {
     @Autowired
     MarkController markController;
 
+    @Autowired
+    MarkRepository markRepository;
+
     @Test
     void addMark() {
+        Mark mark1 = new Mark();
+        markRepository.save(mark1);
     }
 
     @Test
     void getAllMarks() {
+        List<Mark> marks = markRepository.getAllMarks();
     }
 
     @Test
     void deleteMarkById() {
+        markRepository.getPutIsActiveFalseByMarkId(5);
     }
 
     @Test
@@ -33,20 +46,26 @@ class MarkControllerTest {
         assertEquals("fail",grade);
     }
 
-    @Test
-    void getCourseByCourseName() {
-    }
+ /*   @Test
+    void getMarkByGrade() {
+        Mark markToTest=markController.getMarkByGrade("good");
+        Integer markId=markToTest.getId();
+        assertEquals(6,markId);
+    } */
 
     @Test
     void getAllActiveMarks() {
+        List<Mark> activeMarks = markRepository.getAllActiveMarks();
     }
 
     @Test
     void getAllInActiveMarks() {
+        List<Mark> notActiveMark= markRepository.getAllInActiveMarks();
     }
 
     @Test
-    void deleteMarkByColumnNameGrade() {
+    void deleteMarkByColumnNameObtainedMark() {
+        markRepository.getPutIsActiveFalseByColumnNameObtainedMarks(96);
     }
 
     @Test
@@ -55,6 +74,7 @@ class MarkControllerTest {
 
     @Test
     void getPutIsActiveFalseByMarkId() {
+        markRepository.getPutIsActiveFalseByMarkId(5);
     }
 
     @Test

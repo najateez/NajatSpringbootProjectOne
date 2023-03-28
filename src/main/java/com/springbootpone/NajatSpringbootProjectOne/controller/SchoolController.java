@@ -1,18 +1,16 @@
 package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
-import com.springbootpone.NajatSpringbootProjectOne.RequestObjects.SchoolRequestForCreateDateUpdate;
 import com.springbootpone.NajatSpringbootProjectOne.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
-//@Component
-@RestController
+@Component
+//@RestController
 public class SchoolController {
 
     /* After using extends of (BaseEntity class), we create for each class seperate controller. and all codes
@@ -31,9 +29,10 @@ public class SchoolController {
 
     // for inserting : exp : localhost:8080
     @GetMapping
-    public void addSchool() {
+    public School addSchool() {
 
         schoolService.addSchool();
+        return null;
     }
 
     /* must be one @GetMapping to put , just for table that you want to insert values. can not write above

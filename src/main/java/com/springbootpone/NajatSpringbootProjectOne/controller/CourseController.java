@@ -13,7 +13,7 @@ import java.text.ParseException;
 import java.util.List;
 
 
-//@Component
+@Component
 //@RestController
 public class CourseController {
 

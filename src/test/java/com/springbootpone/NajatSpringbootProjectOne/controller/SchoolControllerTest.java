@@ -2,9 +2,13 @@ package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
+import com.springbootpone.NajatSpringbootProjectOne.Repositories.SchoolRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,16 +25,34 @@ class SchoolControllerTest {
     @Autowired
     SchoolController schoolController;
 
+    @Autowired
+    SchoolRepository schoolRepository;
+
     @Test
     void addSchool() {
+        School school1 = new School();
+        schoolRepository.save(school1);
+   //     List<School> schools = schoolRepository.findAll();
     }
 
     @Test
     void getAllSchools() {
+        List<School> schools = schoolRepository.getAllSchools();
     }
 
     @Test
     void deleteSchoolById() {
+        schoolRepository.getPutIsActiveFalseBySchoolId(60);
+
+
+/*        String schoolName="xyz";
+        schoolRepository.getPutIsActiveFalseBySchoolId(9); */
+
+ /*     School schoolObj = new School();
+       schoolObj.setName("najateezSchool");
+        schoolRepository.save(schoolObj);
+
+         schoolRepository.getPutIsActiveFalseBySchoolId(schoolObj.getId()); */
     }
 
     @Test
@@ -42,26 +64,34 @@ class SchoolControllerTest {
 
     @Test
     void getSchoolBySchoolName() {
+        School schoolToTest=schoolController.getSchoolBySchoolName("xyz");
+        Integer schoolId=schoolToTest.getId();
+        assertEquals(9,schoolId);
     }
 
     @Test
     void getAllActiveSchools() {
+        List<School> activeSchools = schoolRepository.getAllActiveSchools();
     }
 
     @Test
     void getAllInActiveSchools() {
+        List<School> notActiveSchools= schoolRepository.getAllInActiveSchools();
     }
 
     @Test
     void deleteSchoolByColumnNameSchoolName() {
+        schoolRepository.getPutIsActiveFalseBySchoolColumnName("twixxxia");
     }
 
     @Test
     void setCreatedDateByUserInput() {
+
     }
 
     @Test
     void getPutIsActiveFalseBySchoolId() {
+        schoolRepository.getPutIsActiveFalseBySchoolId(59);
     }
 
     @Test

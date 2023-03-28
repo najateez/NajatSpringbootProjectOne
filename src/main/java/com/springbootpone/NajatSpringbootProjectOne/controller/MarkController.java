@@ -5,13 +5,14 @@ import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Services.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
 
-
+@Component
 //@RestController
 public class MarkController {
 
