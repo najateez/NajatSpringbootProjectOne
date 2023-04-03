@@ -76,6 +76,13 @@
 			<scope>test</scope>
 		</dependency>
 
+<!-- for school report jaspersoft -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.20.1</version>
+		</dependency>
+
     </dependencies>
 
 	<build>

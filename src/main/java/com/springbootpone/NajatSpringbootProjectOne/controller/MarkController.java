@@ -46,7 +46,7 @@ public class MarkController {
 
     //exp: localhost:8080/mark/getByColumnObtainedMarks?obtainedMarks=82
     @RequestMapping(value = "mark/getByColumnObtainedMarks", method = RequestMethod.GET)
-    public Mark getCourseByCourseName(@RequestParam Integer obtainedMarks){
+    public Mark getMarkByObtainedMarks(@RequestParam Integer obtainedMarks){
         Mark mark = markService.getMarkByObtainedMarks(obtainedMarks);
         return mark;
     }

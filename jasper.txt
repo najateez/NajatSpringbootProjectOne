@@ -1,0 +1,27 @@
+https://community.jaspersoft.com/download -> community addition ->
+ jaspersoft studio CE ->  jaspersoft studio -> click js-studiocomm_6.20.1_windows_x86_64.exe
+-> register -> open your email and click link to login 
+https://community.jaspersoft.com/user/registrationpassword/4080431/1680418427/7qunl4cAHFuNuaYMW5bvTCBCgopPLXOkqzAl57SJBmU
+
+-> then do same steps and download jasper software.
+---------------------------------------
+open jasper software:
+Click file ->jsper report -> choose simple blue -> give file name.exp:SchoolManagementSystem.jrxml
+-> in Data Adapter choose Sample DB- Database JDBC Connection -> next ->
+choose fields as you wish, and click finish.
+
+- down there are 3 options (design,sourse,preview):
+1- do design. just give title and columnName/FieldName.
+2- see it in preview. with random data's.
+3- copy code from source, and create file in intelij in resource and name it:
+SchoolReport_Jaspersoft.jrxml . and past the code of source in it(file in intelij
+ in resource), from jaspersoft.
+
+- add this dependency in pom.xml: {{if there is any error Remove the version}} 
+<!-- for school report jaspersoft -->
+ use latest version:
+                 <dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.20.1</version>
+		</dependency>

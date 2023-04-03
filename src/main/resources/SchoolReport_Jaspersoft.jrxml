@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SchoolManagementSystem" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad6cb737-496f-4554-a917-e05b8bb8070c">
+
+    <!-- Remove below code -->
+ <!--   <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+    <queryString language="SQL">
+        <![CDATA[select * from orders]]>
+    </queryString> -->
+
+    <field name="id" class="java.lang.Integer">
+        <!-- Remove all these 3 properties below-->
+<!--        <property name="com.jaspersoft.studio.field.name" value="CUSTOMERID"/>
+        <property name="com.jaspersoft.studio.field.label" value="CUSTOMERID"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="ORDERS"/> -->
+    </field>
+    <field name="name" class="java.lang.String">
+
+    </field>
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="72">
+            <frame>
+                <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="6e956630-e369-411a-ba4d-1acc2f383020"/>
+                <staticText>
+                    <reportElement x="20" y="20" width="280" height="43" forecolor="#FFFFFF" uuid="a7a81b51-b0e7-42a9-8539-59de7040410b"/>
+                    <textElement>
+                        <font size="34" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Najateez School]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="440" y="40" width="115" height="20" forecolor="#FFFFFF" uuid="391d7f13-5b5a-4cf5-a758-481da793818b"/>
+                    <textElement textAlignment="Right">
+                        <font size="14" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Schools Report ]]></text>
+                </staticText>
+            </frame>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="13"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="21">
+            <line>
+                <reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="dbc441ff-6ff7-4a4f-afe2-f2942c7c79eb"/>
+            </line>
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5b67e01b-58be-4191-adcc-7254ebfd42bc">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf4bf1f9-1ce1-4b6a-a7af-1ba6910cf772"/>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[SchoolId]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="277" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="cf29e676-ca06-4937-8481-b43e0a5d9d0e">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f7a4b6a0-1209-483c-a4c9-5e35c3787adb"/>
+                </reportElement>
+                <textElement textAlignment="Center">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[SchoolName]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="a96c169a-d133-4ab7-9be7-a6e431f0a3f7"/>
+            </line>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="0" y="0" width="277" height="20" uuid="85d348c3-cc37-4d68-825d-b5a284408c9a">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf4bf1f9-1ce1-4b6a-a7af-1ba6910cf772"/>
+                </reportElement>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{SchoolId}]]></textFieldExpression> <!-- change here to school id-->
+            </textField>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="277" y="0" width="277" height="20" uuid="a07222af-4219-40d0-a755-a27e411dfe32">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f7a4b6a0-1209-483c-a4c9-5e35c3787adb"/>
+                </reportElement>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{SchoolName}]]></textFieldExpression><!-- change here to school name-->
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band/>
+    </columnFooter>
+    <pageFooter>
+        <band height="17">
+            <textField>
+                <reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="7b7d7801-2fb3-4e18-9462-9642f515eb8d"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="cbdb84e7-82da-487b-8e00-04dec66b04ec"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="0" y="4" width="100" height="13" uuid="97f14a35-7095-48d6-8b1f-e763e98e23f0"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band/>
+    </summary>
+</jasperReport>

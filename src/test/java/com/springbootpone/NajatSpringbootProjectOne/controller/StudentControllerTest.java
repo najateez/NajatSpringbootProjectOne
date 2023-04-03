@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,30 +19,30 @@ class StudentControllerTest {
     @Autowired
     StudentController studentController;
 
-    @Autowired
-    StudentRepository studentRepository;
+
 
     @Test
     void addStudent() {
-        Student student1 = new Student();
-        studentRepository.save(student1);
+        studentController.addStudent();
     }
 
     @Test
     void getAllStudents() {
-        List<Student> students = studentRepository.getAllStudents();
+        List<Student> students = studentController.getAllStudents();
+        String studentName=students.get(2).getName(); // it will test the studentName if exists in db depend of the index gave. exp: .get(2).
+        assertEquals("aweeehah",studentName);
     }
 
     @Test
     void deleteStudentById() {
-        studentRepository.getPutIsActiveFalseByStudentId(4);
+        studentController.getPutIsActiveFalseByStudentId(31); //post
     }
 
     @Test
     void getStudentById() {
-        Student studentToTest=studentController.getStudentById(44);
+        Student studentToTest=studentController.getStudentById(49);
         String studentName=studentToTest.getName();
-        assertEquals("jannat",studentName);
+        assertEquals("shambeeeh",studentName);
     }
 
     @Test
@@ -52,42 +54,51 @@ class StudentControllerTest {
 
     @Test
     void getAllActiveStudents() {
-        List<Student> activeStudents = studentRepository.getAllActiveStudents();
+        List<Student> activeStudents = studentController.getAllActiveStudents();
+        assertEquals("aweeehah", activeStudents.get(0).getName()); //.get(0) means first student Active(in order from db)
     }
 
     @Test
     void getAllInActiveStudents() {
-        List<Student> notActiveStudents= studentRepository.getAllInActiveStudents();
+        List<Student> notActiveStudents= studentController.getAllInActiveStudents();
+        assertEquals("Najatiix", notActiveStudents.get(0).getName());
     }
 
     @Test
     void deleteStudentByColumnNameStudentName() {
-        studentRepository.getPutIsActiveFalseByStudentName("disney");
+        studentController.getPutIsActiveFalseByStudentName("pppp"); //post
     }
 
     @Test
-    void setCreatedDateByUserInput() {
+    void setCreatedDateByUserInput() throws ParseException {
+        studentController.setCreatedDateByUserInput("1996-9-6 00:00:00.0000000",17); //post
     }
 
     @Test
     void getPutIsActiveFalseByStudentId() {
-        studentRepository.getPutIsActiveFalseByStudentId(6);
+        studentController.getPutIsActiveFalseByStudentId(18);
     }
 
     @Test
     void getPutIsActiveFalseByStudentName() {
+        studentController.getPutIsActiveFalseByStudentName("jannat");
     }
 
     @Test
     void getPutIsActiveFalseForAllStudents() {
+        studentController.getPutIsActiveFalseForAllStudents(); //post
     }
 
     @Test
     void getUpdateStudentById() {
+        studentController.getUpdateStudentById(31,"najateez");
     }
 
     @Test
     void getLatestRowStudent() {
+        Student studentToTest=studentController.getLatestRowStudent();
+        Date LatestRow=studentToTest.getCreatedDate();
+        assertEquals("1996-06-08 00:00:00.0",LatestRow.toString());
     }
 
     @Test
@@ -100,6 +111,7 @@ class StudentControllerTest {
 
     @Test
     void getUpdateIsActiveTrueByStudentId() {
+        studentController.getUpdateIsActiveTrueByStudentId(17); //post
     }
 
     @Test
@@ -108,6 +120,7 @@ class StudentControllerTest {
 
     @Test
     void addNewStudentDependOfStudentInput() {
+        studentController.addNewStudentDependOfStudentInput("shambalala","7407",true); //post
     }
 
     @Test
@@ -115,7 +128,8 @@ class StudentControllerTest {
     }
 
     @Test
-    void getUpdateIsActiveFalseByCreatedDate() {
+    void getUpdateIsActiveFalseByCreatedDate() throws ParseException {
+        studentController.getUpdateIsActiveFalseByCreatedDate("1996-09-06 00:00:00.0000000");
     }
 
     @Test
@@ -123,10 +137,12 @@ class StudentControllerTest {
     }
 
     @Test
-    void getUpdateIsActiveFalseByUpdatedDate() {
+    void getUpdateIsActiveFalseByUpdatedDate() throws ParseException {
+        studentController.getUpdateIsActiveFalseByUpdatedDate("2023-03-13 00:00:00.0000000"); //post
     }
 
     @Test
-    void getDeleteAllStudentsCreatedAfterDate() {
+    void getDeleteAllStudentsCreatedAfterDate() throws ParseException {
+        studentController.getDeleteAllStudentsCreatedAfterDate("2002-07-06 00:00:00.0000000"); //post
     }
 }
