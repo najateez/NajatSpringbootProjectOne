@@ -1,4 +1,12 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- just for understanding -->
+
+
+
+
 <!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SchoolManagementSystem" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad6cb737-496f-4554-a917-e05b8bb8070c">
 
@@ -9,6 +17,7 @@
         <![CDATA[select * from orders]]>
     </queryString> -->
 
+    <!-- field name must be same as properties of (DTO) package -->
     <field name="id" class="java.lang.Integer">
         <!-- Remove all these 3 properties below-->
 <!--        <property name="com.jaspersoft.studio.field.name" value="CUSTOMERID"/>
@@ -82,7 +91,8 @@
                 <textElement>
                     <font size="14"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{SchoolId}]]></textFieldExpression> <!-- change here to school id-->
+                <!-- in textFieldExpression also must be same as properties of (DTO) package-->
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression> <!-- change here to school id-->
             </textField>
             <textField textAdjust="StretchHeight">
                 <reportElement x="277" y="0" width="277" height="20" uuid="a07222af-4219-40d0-a755-a27e411dfe32">
@@ -91,7 +101,7 @@
                 <textElement>
                     <font size="14"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{SchoolName}]]></textFieldExpression><!-- change here to school name-->
+                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression><!-- change here to school name-->
             </textField>
         </band>
     </detail>
