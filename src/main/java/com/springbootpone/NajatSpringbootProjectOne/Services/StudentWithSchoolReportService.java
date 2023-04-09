@@ -34,7 +34,7 @@ public class StudentWithSchoolReportService {
             studentDTOData.add(StudentDTOListObj);
         }
 
-        File file = ResourceUtils.getFile("classpath:StudentWithSchoolReport_Jaspersoft.jrxml");
+        File file = ResourceUtils.getFile("classpath:StrudentWithSchoolReport_Jaspersoft.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(studentDTOData);
         Map<String, Object> paramters = new HashMap<>();

@@ -21,13 +21,18 @@ public class JasperReportController {
     @Autowired
     MarkWithCourseReportService markWithCourseReportService;
 
-    @RequestMapping(value="jasper/getAllDataFromStudentandSchoolTableindb", method = RequestMethod.GET)
+    @RequestMapping(value="jasper/getAllDataFromStudentandSchoolTableindbQuestion1", method = RequestMethod.GET)
     public void generateStudentWithSchoolJasperReport() throws Exception{
          studentWithSchoolReportService.generateStudentWithSchoolJasperReport();
     }
 
-    @RequestMapping(value="jasper/getAllDataFromMarkandCourseTableindb", method = RequestMethod.GET)
-    public void generateMarkWithCourseJasperReport() throws Exception {
-        markWithCourseReportService.generateMarkWithCourseJasperReport();
+    @RequestMapping(value="jasper/getAllDataFromMarkandCourseTableindbQuestion2", method = RequestMethod.GET)
+    public void generateMarkWithCourseJasperReportQuestion2() throws Exception {
+        markWithCourseReportService.generateMarkWithCourseJasperReportQuestion2();
+    }
+
+    @RequestMapping(value="jasper/getAllDataFromMarkandCourseTableindbQuestion3", method = RequestMethod.GET)
+    public void generateMarkWithCourseJasperReport2Question3() throws Exception {
+        markWithCourseReportService.generateMarkWithCourseJasperReport2Question3();
     }
 }

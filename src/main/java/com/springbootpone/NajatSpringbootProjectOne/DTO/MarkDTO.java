@@ -18,10 +18,14 @@ public class MarkDTO {
 
     // generating constructors with parameter
 
-    public MarkDTO(String courseName, Integer obtainedMarks, String grade, Double averageMark) {
+    public MarkDTO(String courseName, Integer obtainedMarks, String grade) {
         this.courseName = courseName;
         this.obtainedMarks = obtainedMarks;
         this.grade = grade;
+    }
+
+    public MarkDTO(String courseName, Double averageMark) {
+        this.courseName = courseName;
         this.averageMark = averageMark;
     }
 }
