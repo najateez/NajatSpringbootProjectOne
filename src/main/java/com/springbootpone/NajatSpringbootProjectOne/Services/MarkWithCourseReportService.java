@@ -25,7 +25,8 @@ public class MarkWithCourseReportService {
     @Autowired
     MarkRepository markRepository;
 
-    public static final String pathToReports = "C:\\Users\\Acer\\Downloads\\Reports";
+   // public static final String pathToReports = "C:\\Users\\Acer\\Downloads\\Reports";
+   public static final String pathToReports = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
 
     public String generateMarkWithCourseJasperReportQuestion2() throws FileNotFoundException, JRException {
         List<Mark> markList = markRepository.getAllMarks();  // to take data from db
@@ -47,14 +48,15 @@ public class MarkWithCourseReportService {
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\MarkWithCourseJasperReport.pdf");
-        return "Report generated : " + pathToReports+"\\MarkWithCourseJasperReport.pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\MarkWithCourseJasperReportQuestion2.pdf");
+        return "Report generated : " + pathToReports+"\\MarkWithCourseJasperReportQuestion2.pdf";
     }
 
 
 
 
-    public static final String pathToReports2 = "C:\\Users\\Acer\\Downloads\\Reports";
+  //  public static final String pathToReports2 = "C:\\Users\\Acer\\Downloads\\Reports";
+  public static final String pathToReports2 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
 
     public String generateMarkWithCourseJasperReport2Question3() throws FileNotFoundException, JRException {
         List<Mark> markList = markRepository.getAllMarks();  // to take data from db
@@ -112,6 +114,40 @@ public class MarkWithCourseReportService {
 
         return "Report generated : " + pathToReports + "\\MarkWithCourseJasperReportQuestion3.pdf";
     }
+
+
+    // public static final String pathToReports = "C:\\Users\\Acer\\Downloads\\Reports";
+ /*   public static final String pathToReports3 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+
+    public String generateMarkWithCourseJasperReportQuestion7() throws FileNotFoundException, JRException {
+        List<Mark> markList = markRepository.getAllMarks();  // to take data from db
+        List<MarkDTO> markDTOData = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
+
+        Map<String, Integer> gradeCounts = new HashMap<>();
+
+        for(Mark m:markList){
+            String courseName = m.getCourse().getName();
+            String grade = m.getGrade();
+            Integer count = gradeCounts.getOrDefault(grade, 0);
+            gradeCounts.put(grade, count + 1);
+
+
+            MarkDTO markDTOListObj=new MarkDTO(courseName,grade,count);
+            markDTOData.add(markDTOListObj);
+        }
+
+        File file = ResourceUtils.getFile("classpath:MarkWithCourseReportQuestion7_Jaspersoft.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(markDTOData);
+        Map<String, Object> paramters = new HashMap<>();
+        paramters.put("CreatedBy", "Najat Tech Mahindra");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\MarkWithCourseJasperReportQuestion7.pdf");
+        return "Report generated : " + pathToReports+"\\MarkWithCourseJasperReportQuestion7.pdf";
+    } */
+
+
+
 }
 
 
