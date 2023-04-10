@@ -117,7 +117,7 @@ public class MarkWithCourseReportService {
 
 
     // public static final String pathToReports = "C:\\Users\\Acer\\Downloads\\Reports";
- /*   public static final String pathToReports3 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+  public static final String pathToReports3 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
 
     public String generateMarkWithCourseJasperReportQuestion7() throws FileNotFoundException, JRException {
         List<Mark> markList = markRepository.getAllMarks();  // to take data from db
@@ -128,13 +128,33 @@ public class MarkWithCourseReportService {
         for(Mark m:markList){
             String courseName = m.getCourse().getName();
             String grade = m.getGrade();
-            Integer count = gradeCounts.getOrDefault(grade, 0);
-            gradeCounts.put(grade, count + 1);
 
+            MarkDTO markDTOListObj = new MarkDTO(courseName, grade, 1);
+            if (grade.equals("good")) {
+                markDTOListObj.setCountGrade(1);
+            } else if (grade.equals("fail")) {
+                markDTOListObj.setCountGrade(1);
+            }
 
-            MarkDTO markDTOListObj=new MarkDTO(courseName,grade,count);
+            boolean found = false;
+            for (MarkDTO dto : markDTOData) {
+                if (dto.getCourseName().equals(courseName) && dto.getGrade().equals(grade)) {
+                    dto.setCountGrade(dto.getCountGrade() + 1);
+                    if (grade.equals("good")) {
+                        dto.setCountGrade(dto.getCountGrade() + 1);
+                    } else if (grade.equals("fail")) {
+                        dto.setCountGrade(dto.getCountGrade() + 1);
+                    }
+                    found = true;
+                    break;
+                }
+            }
+
+        if (!found) {
             markDTOData.add(markDTOListObj);
         }
+    }
+
 
         File file = ResourceUtils.getFile("classpath:MarkWithCourseReportQuestion7_Jaspersoft.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -144,7 +164,7 @@ public class MarkWithCourseReportService {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
         JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\MarkWithCourseJasperReportQuestion7.pdf");
         return "Report generated : " + pathToReports+"\\MarkWithCourseJasperReportQuestion7.pdf";
-    } */
+    }
 
 
 
