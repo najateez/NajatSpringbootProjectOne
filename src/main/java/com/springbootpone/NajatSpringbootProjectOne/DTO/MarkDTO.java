@@ -9,7 +9,7 @@ import lombok.Setter;
 @Data
 public class MarkDTO {
 
-    //for Mark with Course Report. for Q2,Q3
+    //for Mark with Course Report.
 
     private String courseName;
     private Integer obtainedMarks;
@@ -33,8 +33,6 @@ public class MarkDTO {
     }
 
     //for question 7
-
-
     public MarkDTO(String courseName, String grade, Integer countGrade) {
         this.courseName = courseName;
         this.grade = grade;

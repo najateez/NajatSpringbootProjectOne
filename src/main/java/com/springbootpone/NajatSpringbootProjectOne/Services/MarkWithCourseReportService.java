@@ -69,7 +69,7 @@ public class MarkWithCourseReportService {
 
         //string for course name, integer for ObtainedMarks
         Map<String, List<Integer>> courseObtainedMarksMap = new HashMap<>();
-        Map<String, String> gradeMap = new HashMap<>();  // this HashMap grade mush be there, without it it will show error, can not define grade.
+    //    Map<String, String> gradeMap = new HashMap<>();  // this HashMap grade mush be there, without it it will show error, can not define grade.
 
         for (Mark m : markList) {
             String courseName = m.getCourse().getName();
@@ -85,7 +85,7 @@ public class MarkWithCourseReportService {
                 courseObtainedMarksMap.put(courseName, obtainedMarksList);
             }
 
-            gradeMap.put(courseName, grade);
+      //      gradeMap.put(courseName, grade);
 
 
         }

@@ -2,6 +2,7 @@ package com.springbootpone.NajatSpringbootProjectOne.controller;
 
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Services.MarkWithCourseReportService;
+import com.springbootpone.NajatSpringbootProjectOne.Services.StudentReportService;
 import com.springbootpone.NajatSpringbootProjectOne.Services.StudentService;
 import com.springbootpone.NajatSpringbootProjectOne.Services.StudentWithSchoolReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class JasperReportController {
     StudentWithSchoolReportService studentWithSchoolReportService;
     @Autowired
     MarkWithCourseReportService markWithCourseReportService;
+    @Autowired
+    StudentReportService studentReportService;
 
     //created .jrxml file -> StudentDTO -> Service -> Controller.
     //will create report in this location as pdf file. C:\Users\Acer\intellijIdea-workspace\NajatSpringbootProjectOne\Reports
@@ -49,5 +52,17 @@ public class JasperReportController {
     @RequestMapping(value="jasper/generateMarkWithCourseReportQ7", method = RequestMethod.GET)
     public void generateMarkWithCourseJasperReportQuestion7() throws Exception {
         markWithCourseReportService.generateMarkWithCourseJasperReportQuestion7();
+    }
+
+    //localhost:8080/jasper/generateTopPerformingStudentReportQuestion4
+    @RequestMapping(value="jasper/generateTopPerformingStudentReportQuestion4", method = RequestMethod.GET)
+    public void generateTopPerformingStudentReportQuestion4() throws Exception {
+        studentWithSchoolReportService.generateTopPerformingStudentReportQuestion4();
+    }
+
+    //localhost:8080/jasper/generateTopPerformingStudentReportQuestion4
+    @RequestMapping(value="jasper/generateStudentPerformanceReportQuestion5", method = RequestMethod.GET)
+    public void generateStudentPerformanceReportQuestion5() throws Exception {
+        studentReportService.generateStudentPerformanceReportQuestion5();
     }
 }

@@ -2,7 +2,11 @@ package com.springbootpone.NajatSpringbootProjectOne.Services;
 
 
 import com.springbootpone.NajatSpringbootProjectOne.DTO.StudentDTO;
+import com.springbootpone.NajatSpringbootProjectOne.DTO.TopPerformingStudentDTO;
+import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
+import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -19,6 +23,8 @@ public class StudentWithSchoolReportService {
 
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    MarkRepository markRepository;
 
   //  public static final String pathToReports = "C:\\Users\\Acer\\Downloads\\Reports";
     public static final String pathToReports = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
@@ -80,6 +86,62 @@ public class StudentWithSchoolReportService {
         JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\StudentReportQuestion6.pdf");
         return "Report generated : " + pathToReports+"\\StudentReportQuestion6.pdf";
     }
+
+    //----------------------------------------------------------------------------------
+
+//Top-Performing Student Report
+
+    /* explaination how i did:
+    its all about foreign key from school table to mark table.
+    first it will check school table and student table which students in that school. then it will take
+    only students which have foreign key with course. then will check that course table and mark table,
+    that prevoius student has which course, then will go to mark table, will Sum Total of (ObtainedMarks) of that student
+    and show result in ascending order.
+     */
+
+    public static final String pathToReports3 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+
+    public String generateTopPerformingStudentReportQuestion4() throws FileNotFoundException, JRException {
+        List<Student> studentList = studentRepository.getAllStudents();
+        List<Mark> markList = markRepository.getAllMarks();
+
+     //   List<TopPerformingStudentDTO> topPerformingStudentDTOList = new ArrayList<>();
+
+        Map<Student, Integer> studentMarks = new HashMap<>();
+
+        // calculate total marks obtained by each student, depend on what student have course.
+        for (Mark mark : markList) {
+            Integer obtainedMarks = studentMarks.getOrDefault(mark.getCourse().getStudent(), 0);
+            obtainedMarks += mark.getObtainedMarks();
+            studentMarks.put(mark.getCourse().getStudent(), obtainedMarks);
+        }
+
+        // sort the students by obtained marks
+        List<Map.Entry<Student, Integer>> sortedList = new ArrayList<>(studentMarks.entrySet());
+        sortedList.sort(Map.Entry.comparingByValue());
+
+        // create DTO objects for top-performing students
+        List<TopPerformingStudentDTO> topPerformingStudents = new ArrayList<>();
+        for (int i = sortedList.size() - 1; i >= 0 && i >= sortedList.size() - 10; i--) {
+            Map.Entry<Student, Integer> entry = sortedList.get(i);
+            topPerformingStudents.add(new TopPerformingStudentDTO(
+                    entry.getKey().getSchool().getName(),
+                    entry.getKey().getName(),
+                    entry.getValue()));
+        }
+
+
+        File file = ResourceUtils.getFile("classpath:TopPerformingStudentReportQuestion4_Jaspersoft.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(topPerformingStudents);
+        Map<String, Object> paramters = new HashMap<>();
+        paramters.put("CreatedBy", "Najat Tech Mahindra");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\TopPerformingStudentReportQuestion4.pdf");
+        return "Report generated : " + pathToReports+"\\TopPerformingStudentReportQuestion4.pdf";
+    }
+
+
 
 
 }
