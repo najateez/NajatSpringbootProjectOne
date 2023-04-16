@@ -68,7 +68,7 @@
                 <textElement textAlignment="Center">
                     <font size="14" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Count of marks for each grade]]></text>
+                <text><![CDATA[Count marks each grade]]></text>
             </staticText>
         </band>
     </columnHeader>

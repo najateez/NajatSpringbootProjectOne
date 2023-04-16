@@ -9,7 +9,7 @@ import lombok.Setter;
 @Data
 public class MarkDTO {
 
-    //for Mark with Course Report.
+    //for Mark with Course Jasper Report.
 
     private String courseName;
     private Integer obtainedMarks;
@@ -17,7 +17,7 @@ public class MarkDTO {
     private Double averageMark;
     private Integer countGrade;
 
-    // generating constructors with parameter
+    // generating constructors with parameter depend of question request.
 
     //for question 2
     public MarkDTO(String courseName, Integer obtainedMarks, String grade) {

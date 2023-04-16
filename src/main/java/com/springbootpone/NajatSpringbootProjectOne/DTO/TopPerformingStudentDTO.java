@@ -13,6 +13,10 @@ public class TopPerformingStudentDTO {
 
     private String schoolName;
     private String studentName;
+
+    /* will calculate total sum of obtainedMarks of that course of that student of that school, then which is the
+       highest will be the top to ...
+     */
     private Integer obtainedMarks;
 
     public TopPerformingStudentDTO(String schoolName, String studentName, Integer obtainedMarks) {

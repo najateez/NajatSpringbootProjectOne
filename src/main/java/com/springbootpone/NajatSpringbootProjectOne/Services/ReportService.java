@@ -16,6 +16,8 @@ import java.util.Map;
 
 @Service
 public class ReportService {
+
+    // just for understanding
     @Autowired
     SchoolRepository schoolRepository;
 
