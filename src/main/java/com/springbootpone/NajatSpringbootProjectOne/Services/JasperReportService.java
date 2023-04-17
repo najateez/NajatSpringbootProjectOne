@@ -1,17 +1,20 @@
 package com.springbootpone.NajatSpringbootProjectOne.Services;
 
-import com.springbootpone.NajatSpringbootProjectOne.DTO.MarkDTO;
-import com.springbootpone.NajatSpringbootProjectOne.DTO.StudentDTO;
-import com.springbootpone.NajatSpringbootProjectOne.DTO.TopPerformingStudentDTO;
+import com.springbootpone.NajatSpringbootProjectOne.DTO.*;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
+import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
+
+
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
+
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class JasperReportService {
@@ -42,13 +46,13 @@ public class JasperReportService {
         List<StudentDTO> studentDTOData = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
 
         //to get all values from db
-        for(Student s:studentList){
+        for (Student s : studentList) {
             String schoolName = s.getSchool().getName(); //because in table student there is school_id, so it can take school information also from school table. .getSchool()-> means it will go inside school table from student table by school id.
             String studentName = s.getName();
             String rollNumber = s.getRollNumber();
 
             //define object of contracture for property of DTO
-            StudentDTO StudentDTOListObj=new StudentDTO(schoolName,studentName,rollNumber);
+            StudentDTO StudentDTOListObj = new StudentDTO(schoolName, studentName, rollNumber);
             //add this values from database to list of jasper report.
             studentDTOData.add(StudentDTOListObj);
         }
@@ -59,10 +63,10 @@ public class JasperReportService {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(studentDTOData);
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra"); //created by any company name
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramters, dataSource);
         // name given for pdf file when jasper report created.
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\StudentWithSchoolJasperReportQuestion1.pdf");
-        return "Report generated : " + pathToReports+"\\StudentWithSchoolJasperReportQuestion1.pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\StudentWithSchoolJasperReportQuestion1.pdf");
+        return "Report generated : " + pathToReports + "\\StudentWithSchoolJasperReportQuestion1.pdf";
     }
 
     //--------------------------------------------------------------------------------
@@ -76,13 +80,13 @@ public class JasperReportService {
         List<Mark> markList = markRepository.getAllMarks();  // to take data from db
         List<MarkDTO> markDTOData = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
 
-        for(Mark m:markList){
+        for (Mark m : markList) {
             String courseName = m.getCourse().getName();
             Integer obtainedMarks = m.getObtainedMarks();
             String grade = m.getGrade();
 
 
-            MarkDTO markDTOListObj=new MarkDTO(courseName,obtainedMarks,grade);
+            MarkDTO markDTOListObj = new MarkDTO(courseName, obtainedMarks, grade);
             markDTOData.add(markDTOListObj);
         }
 
@@ -91,9 +95,9 @@ public class JasperReportService {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(markDTOData);
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\MarkWithCourseJasperReportQuestion2.pdf");
-        return "Report generated : " + pathToReports+"\\MarkWithCourseJasperReportQuestion2.pdf";
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\MarkWithCourseJasperReportQuestion2.pdf");
+        return "Report generated : " + pathToReports + "\\MarkWithCourseJasperReportQuestion2.pdf";
     }
 
 //-----------------------------------------------------------------------------
@@ -175,7 +179,7 @@ public class JasperReportService {
         Map<String, Integer> schoolNoOfStudentsMap = new HashMap<>();
 
 
-        for(Student s:studentList) {
+        for (Student s : studentList) {
             String schoolName = s.getSchool().getName();
             //if no students in that school put 0 otherwise add 1
             schoolNoOfStudentsMap.put(schoolName, schoolNoOfStudentsMap.getOrDefault(schoolName, 0) + 1);
@@ -193,9 +197,9 @@ public class JasperReportService {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(studentDTOList);
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\StudentReportQuestion6.pdf");
-        return "Report generated : " + pathToReports+"\\StudentReportQuestion6.pdf";
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\StudentReportQuestion6.pdf");
+        return "Report generated : " + pathToReports + "\\StudentReportQuestion6.pdf";
     }
 
     //-----------------------------------------------------
@@ -212,7 +216,7 @@ public class JasperReportService {
         List<Mark> markList = markRepository.getAllMarks();  // to take data from db
         List<MarkDTO> markDTOData = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
 
-        for(Mark m:markList){
+        for (Mark m : markList) {
             String courseName = m.getCourse().getName();
             String grade = m.getGrade();
 
@@ -238,9 +242,9 @@ public class JasperReportService {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(markDTOData);
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\MarkWithCourseJasperReportQuestion7.pdf");
-        return "Report generated : " + pathToReports+"\\MarkWithCourseJasperReportQuestion7.pdf";
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\MarkWithCourseJasperReportQuestion7.pdf");
+        return "Report generated : " + pathToReports + "\\MarkWithCourseJasperReportQuestion7.pdf";
     }
 
     //-----------------------------------------------------
@@ -294,9 +298,90 @@ public class JasperReportService {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(topPerformingStudents);
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra");
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\TopPerformingStudentReportQuestion4.pdf");
-        return "Report generated : " + pathToReports+"\\TopPerformingStudentReportQuestion4.pdf";
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\TopPerformingStudentReportQuestion4.pdf");
+        return "Report generated : " + pathToReports + "\\TopPerformingStudentReportQuestion4.pdf";
     }
+
+    //-----------------------------------------------------
+
+    //Question 5:
+
+    public static final String pathToReports7 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+
+    public String generateStudentPerformanceReportQuestion5() throws FileNotFoundException, JRException {
+        List<Student> studentList = studentRepository.getAllStudents();  // to take data from db
+        List<Mark> markList = markRepository.getAllMarks(); // to take data from db
+
+     //   List<StudentPerformanceDTO> StudentPerformanceDTOList = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list). or i can say DTO Constructor in this class name (StudentDTO.java) has these properties required in question. inside package DTO.
+
+        //string for student name, integer for ObtainedMarks
+        Map<String, List<Integer>> studentCourseMarksMap = new HashMap<>();
+
+        //to get all values from db
+        for (Mark m : markList) {
+            String studentName = m.getCourse().getStudent().getName();
+            String rollNumber = m.getCourse().getStudent().getRollNumber();
+            Integer obtainedMarks = m.getObtainedMarks(); // to calculate average mark, thats why i added here (obtainedMarks). but i did not add it in DTO. because not required in question.
+
+            // create obtainedMarks list of that course
+            List<Integer> courseObtainedMarksList = studentCourseMarksMap.getOrDefault(studentName, new ArrayList<>()); //studentName will take frm db, with obtainedMarks
+            courseObtainedMarksList.add(obtainedMarks); //obtainedMarks from db will be added to ArrayList.
+            studentCourseMarksMap.put(studentName, courseObtainedMarksList); //put student name with all obtainedMarks in HashMap.
+        }
+
+        //To add these all data from database to jasper report, i add below code:
+        // Calculate the average marks for each student and course. add the StudentPerformanceDTO object to the Arraylist
+        List<StudentPerformanceDTO> studentPerformanceDTOList = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list). or i can say DTO Constructor in this class name (StudentDTO.java) has these properties required in question. inside package DTO.
+
+        for (Student student : studentList) {
+            String studentName = student.getName();
+            String rollNumber = student.getRollNumber();
+
+            List<Integer> courseObtainedMarksList = studentCourseMarksMap.get(studentName);
+
+            //using java stream, to calculate average mark:
+            if (courseObtainedMarksList != null && !courseObtainedMarksList.isEmpty()) {
+                Double averageMarkOfObtainedMarks = courseObtainedMarksList.stream().mapToInt(Integer::intValue).average().getAsDouble();
+
+                StudentPerformanceDTO studentPerformanceDTOObj = new StudentPerformanceDTO(studentName, rollNumber, averageMarkOfObtainedMarks);
+                studentPerformanceDTOList.add(studentPerformanceDTOObj);
+            }
+        }
+
+        File file = ResourceUtils.getFile("classpath:StudentPerformanceReportQ5_Jaspersoft.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(studentPerformanceDTOList);
+        Map<String, Object> paramters = new HashMap<>();
+        paramters.put("CreatedBy", "Najat Tech Mahindra");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, paramters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports + "\\StudentPerformanceReportQuestion5.pdf");
+        return "Report generated : " + pathToReports + "\\StudentPerformanceReportQuestion5.pdf";
+    }
+
+    //---------------------------------------------------------------------
+
+    //Question 8:
+/*    public static final String pathToReports8 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+
+
+    public String generateTopPerformingCourseReportQuestion8() throws FileNotFoundException, JRException {
+        List<Student> studentList = studentRepository.getAllStudents();  // to take data from db
+        List<Mark> markList = markRepository.getAllMarks(); // to take data from db
+
+        List<TopPerformingCourseDTO> TopPerformingCourseDTOList = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
+
+
+        File file = ResourceUtils.getFile("classpath:TopPerformingCourseReportQuestion8_Jaspersoft.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(TopPerformingCourseDTOList);
+        Map<String, Object> paramters = new HashMap<>();
+        paramters.put("CreatedBy", "Najat Tech Mahindra");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\TopPerformingCourseReportQuestion8.pdf");
+        return "Report generated : " + pathToReports+"\\TopPerformingCourseReportQuestion8.pdf";
+    } */
+
+
 
 }

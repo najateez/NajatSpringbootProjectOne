@@ -63,5 +63,15 @@ public class JasperReportController {
         jasperReportService.generateTopPerformingStudentReportQuestion4();
     }
 
+    @RequestMapping(value="jasper/generateStudentPerformanceReportQuestion5", method = RequestMethod.GET)
+    public void generateStudentPerformanceReportQuestion5() throws Exception {
+        jasperReportService.generateStudentPerformanceReportQuestion5();
+    }
+
+  /*  @RequestMapping(value="jasper/generateTopPerformingCourseReportQuestion8", method = RequestMethod.GET)
+    public void generateTopPerformingCourseReportQuestion8() throws Exception {
+        jasperReportService.generateTopPerformingCourseReportQuestion8();
+    } */
+
 
 }
