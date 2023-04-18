@@ -1,6 +1,7 @@
 package com.springbootpone.NajatSpringbootProjectOne.Services;
 
 import com.springbootpone.NajatSpringbootProjectOne.DTO.*;
+import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
@@ -18,10 +19,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -362,25 +360,110 @@ public class JasperReportService {
     //---------------------------------------------------------------------
 
     //Question 8:
-/*    public static final String pathToReports8 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
-
+    public static final String pathToReports8 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
 
     public String generateTopPerformingCourseReportQuestion8() throws FileNotFoundException, JRException {
         List<Student> studentList = studentRepository.getAllStudents();  // to take data from db
         List<Mark> markList = markRepository.getAllMarks(); // to take data from db
 
-        List<TopPerformingCourseDTO> TopPerformingCourseDTOList = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
+        //    List<TopPerformingCourseDTO> TopPerformingCourseDTOList = new ArrayList<>();  //to store data from db table to (StudentDTO list of jaspersoft list).
 
+        //All details from class Course(Model),All details from class Mark(Model) as list
+        Map<Course, List<Mark>> obtainedMarksByCourse = new HashMap<>();
+        // to take values from db
+        for (Mark mark : markList) {
+            Course course = mark.getCourse();
+            //if HashMap contains course add obtainedMarks, else add course and create new ArrayList for obtainedMarks.
+            if (!obtainedMarksByCourse.containsKey(course)) {
+                obtainedMarksByCourse.put(course, new ArrayList<>());
+            }
+            obtainedMarksByCourse.get(course).add(mark);
+        }
+
+        //to store all data in jasper report as list:
+        List<TopPerformingCourseDTO> topPerformingCourseDTOList = new ArrayList<>();
+        // if Course details, list of mark details, and obtainedMarks entered and set, display:
+        for (Map.Entry<Course, List<Mark>> entry : obtainedMarksByCourse.entrySet()) {
+            Course course = entry.getKey();
+            List<Mark> marks = entry.getValue();
+            //calculate average mark. if no obtainedMarks print 0.
+            double averageMark = marks.stream().mapToDouble(Mark::getObtainedMarks).average().orElse(0.0);
+
+            //put in jasper report as list.
+            TopPerformingCourseDTO topPerformingCourseDTO = new TopPerformingCourseDTO(course.getStudent().getSchool().getName(), course.getName(), averageMark);
+            topPerformingCourseDTOList.add(topPerformingCourseDTO);
+        }
+
+        //sort courses with school depend of top average mark. in descending order.
+        //to be fixed order and correct order should sort be outside loop.
+        Collections.sort(topPerformingCourseDTOList, (o1, o2) -> o2.getAverageMark().compareTo(o1.getAverageMark()));
 
         File file = ResourceUtils.getFile("classpath:TopPerformingCourseReportQuestion8_Jaspersoft.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(TopPerformingCourseDTOList);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(topPerformingCourseDTOList);
         Map<String, Object> paramters = new HashMap<>();
         paramters.put("CreatedBy", "Najat Tech Mahindra");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
         JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\TopPerformingCourseReportQuestion8.pdf");
         return "Report generated : " + pathToReports+"\\TopPerformingCourseReportQuestion8.pdf";
-    } */
+    }
+
+    //------------------------------------------------------------
+
+    //Question 10:
+    public static final String pathToReports9 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+
+    public String generateOverallPerformanceReportQuestion10() throws FileNotFoundException, JRException {
+        List<Mark> markList = markRepository.getAllMarks(); //mark has foreign key of course,then student then school
+
+        List<OverallPerformanceDTO> overallPerformanceDTOList = new ArrayList<>();
+
+        //String schoolName, Integer obtainedMarks
+        Map<String, List<Integer>> schoolObtainedMarksMap = new HashMap<>();
+
+        for (Mark m : markList) {
+            String schoolName = m.getCourse().getStudent().getSchool().getName();
+            Integer obtainedMarks = m.getObtainedMarks();
+
+            //the way of calculating average marks i used same way as solution of question 3
+
+            if (schoolObtainedMarksMap.containsKey(schoolName)) {
+                schoolObtainedMarksMap.get(schoolName).add(obtainedMarks);
+            } else {
+                List<Integer> obtainedMarksList = new ArrayList<>(); //used ArrayList also to divide by its size of obtainedMarks. for(average mark).
+                obtainedMarksList.add(obtainedMarks);
+                schoolObtainedMarksMap.put(schoolName, obtainedMarksList);
+            }
+
+        }
+
+        // Loop through the schoolObtainedMarksMap (HashMap). because all obtainedMarks which are in list, get it school name from db.
+        for (String schoolName : schoolObtainedMarksMap.keySet()) {
+            List<Integer> obtainedMarksList = schoolObtainedMarksMap.get(schoolName);
+
+            // calculate the averageMarks for each schoolName:
+            Double sum = 0.0;
+            //to display all obtainedMarks which are in obtainedMarksList and add them together of that course that student that school.
+            for (Integer obtainedMark : obtainedMarksList) {
+                sum += obtainedMark;
+            }
+            Double averageMark = sum / obtainedMarksList.size(); // sum/size of obatinedMarks in list.
+
+            //add school name and average mark to jasper report pdf.
+            OverallPerformanceDTO markDTOListObj = new OverallPerformanceDTO(schoolName, averageMark);
+            overallPerformanceDTOList.add(markDTOListObj);
+        }
+
+        File file = ResourceUtils.getFile("classpath:overallPerformanceReportQuestion10_Jaspersoft.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(overallPerformanceDTOList);
+        Map<String, Object> paramters = new HashMap<>();
+        paramters.put("CreatedBy", "Najat Tech Mahindra");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\OverallPerformanceReportQuestion10.pdf");
+        return "Report generated : " + pathToReports+"\\OverallPerformanceReportQuestion10.pdf";
+    }
+
 
 
 

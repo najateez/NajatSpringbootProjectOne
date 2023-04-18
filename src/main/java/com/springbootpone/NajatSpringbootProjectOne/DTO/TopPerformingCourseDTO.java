@@ -11,7 +11,7 @@ public class TopPerformingCourseDTO {
 
     //for question 8
 
- /*   private String schoolName;
+    private String schoolName;
     private String courseName;
     private Double averageMark;
 
@@ -19,5 +19,5 @@ public class TopPerformingCourseDTO {
         this.schoolName = schoolName;
         this.courseName = courseName;
         this.averageMark = averageMark;
-    } */
+    } 
 }
