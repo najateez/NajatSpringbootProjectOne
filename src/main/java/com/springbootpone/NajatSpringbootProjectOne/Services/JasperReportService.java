@@ -5,6 +5,7 @@ import com.springbootpone.NajatSpringbootProjectOne.Models.Course;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Mark;
 import com.springbootpone.NajatSpringbootProjectOne.Models.School;
 import com.springbootpone.NajatSpringbootProjectOne.Models.Student;
+import com.springbootpone.NajatSpringbootProjectOne.Repositories.CourseRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.MarkRepository;
 import com.springbootpone.NajatSpringbootProjectOne.Repositories.StudentRepository;
 
@@ -31,6 +32,8 @@ public class JasperReportService {
     StudentRepository studentRepository;
     @Autowired
     MarkRepository markRepository;
+    @Autowired
+    CourseRepository courseRepository; //this autowired for question 9
 
     //Question 1:
 
@@ -463,6 +466,61 @@ public class JasperReportService {
         JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\OverallPerformanceReportQuestion10.pdf");
         return "Report generated : " + pathToReports+"\\OverallPerformanceReportQuestion10.pdf";
     }
+
+    //------------------------------------------------------
+
+    /* Question 9:
+      if you gave input in postman as obtainedMarks = 30, should count No.of student and display it course name
+      which their obtainedMarks above 30 for each course. from db. exp:
+      in postman:
+      localhost:8080/jasper/generateStudentReportQuestion9?obtainedMarks=30
+      should print jasper report , will check obtainMarks from mark table, all courses that contain
+      obtainsMarks above 30, will write No.of students with it course name of each course.
+     */
+
+    public static final String pathToReports10 = "C:\\Users\\Acer\\intellijIdea-workspace\\NajatSpringbootProjectOne\\Reports";
+
+    public String generateStudentReportQuestion9(Integer obtainedMarks) throws FileNotFoundException, JRException {
+
+        //to get obtainedMarks More than input (obtainedMarks) gave in postman.
+        List<Mark> markList = markRepository.getByObtainedMarksMoreThan(obtainedMarks);
+
+        //String course name, Integer count no.of students
+        Map<String, Integer> countMap = new HashMap<>();
+
+        // loop through mark. and if obtainedMarks in db is greater than which gave in postman, display course name and count no.of student of each course, otherwise print 0.
+        for (Mark mark : markList) {
+            if (mark.getObtainedMarks() > obtainedMarks) {
+                String courseName = mark.getCourse().getName();
+                String studentName = mark.getCourse().getStudent().getName();
+
+                Integer count = countMap.getOrDefault(studentName, 0);
+                countMap.put(courseName, count + 1); //will count No.of Students
+            }
+        }
+
+        // Create a list of CountStudentDTO to display data in jasper report list
+        List<CountStudentDTO> countStudentDTOList = new ArrayList<>();
+        //if HashMap of course name and no.of student is set, get them and add to jasper report list.
+        for (Map.Entry<String, Integer> entry : countMap.entrySet()) {
+            String courseName = entry.getKey();
+            Integer countNoOfStudents = entry.getValue();
+
+            CountStudentDTO dto = new CountStudentDTO(courseName, countNoOfStudents);
+            countStudentDTOList.add(dto);
+        }
+
+
+        File file = ResourceUtils.getFile("classpath:StudentReportQuestion9_Jaspersoft.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(countStudentDTOList);
+        Map<String, Object> paramters = new HashMap<>();
+        paramters.put("CreatedBy", "Najat Tech Mahindra");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,paramters , dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pathToReports+"\\StudentReportQuestion9.pdf");
+        return "Report generated : " + pathToReports+"\\StudentReportQuestion9.pdf";
+    }
+
 
 
 
